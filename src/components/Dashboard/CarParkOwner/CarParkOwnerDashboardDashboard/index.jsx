@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 import {ROUTES} from "../../../../routes/routes";
 
 const links = [
-    {id: 1, to: ROUTES.carParkOwnerDashboardHome, text: "Parking Lot Registration Form", color: "bg-dark-purple"},
+    {id: 1, to: ROUTES.carParkOwnerRegisterCarPark, text: "Parking Lot Registration Form", color: "bg-dark-purple"},
     {id: 2, to: ROUTES.carParkOwnerViewCarParks, text: "View registered car parks", color: "bg-light-blue"},
     {id: 3, to: ROUTES.carParkOwnerFeedbacks, text: "View Feedback", color: "bg-dark-green-100"},
     {id: 4, to: ROUTES.carParkOwnerIncomeReport, text: "View income report", color: "bg-dark-blue"},
