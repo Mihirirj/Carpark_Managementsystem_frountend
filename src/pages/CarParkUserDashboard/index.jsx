@@ -1,12 +1,12 @@
-import Sidebar from "../../components/Sidebar";
 import Topbar from "../../components/Topbar";
-import {Outlet} from "react-router-dom";
 import Pathbar from "../../components/Pathbar";
+import {Outlet} from "react-router-dom";
+import CarUserSidebar from "../../components/Sidebar/CarUserSidebar";
 
-export default function Dashboard() {
+export default function CarParkUserDashboard() {
     return (
         <div>
-            <Sidebar/>
+            <CarUserSidebar/>
             <div className="bg-light-gray ml-60 px-6 h-screen overflow-y-scroll pb-10">
                 <Topbar/>
                 <Pathbar/>
