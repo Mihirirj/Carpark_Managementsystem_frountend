@@ -1,17 +1,16 @@
 import {Link} from "react-router-dom";
-import ROUTES from "../../../../routes/routes";
+import {ROUTES} from "../../../../routes/routes";
 
 const links = [
-    {id: 1, to: ROUTES.home, text: "Become Park Owner", color: "bg-dark-purple"},
-    {id: 2, to: ROUTES.viewCarParks, text: "View registered car parks", color: "bg-light-blue"},
+    {id: 1, to: ROUTES.carParkOwnerDashboardHome, text: "Become Park Owner", color: "bg-dark-purple"},
+    {id: 2, to: ROUTES.carParkOwnerViewCarParks, text: "View registered car parks", color: "bg-light-blue"},
     {id: 3, to: ROUTES.view, text: "View Feedback", color: "bg-dark-green-100"},
-    {id: 4, to: ROUTES.incomeReport, text: "View income report", color: "bg-dark-blue"},
+    {id: 4, to: ROUTES.carParkOwnerIncomeReport, text: "View income report", color: "bg-dark-blue"},
     {id: 5, to: ROUTES.logout, text: "View reservations", color: "bg-dark-blue-200"},
-    {id: 6, to: ROUTES.home, text: "View users details", color: "bg-dark-blue-100"},
+    {id: 6, to: ROUTES.carParkOwnerDashboardHome, text: "View users details", color: "bg-dark-blue-100"},
 ];
 
-
-export default function CarOwnerDashboardHome() {
+export default function CarParkOwnerDashboardDashboard() {
     return (
         <div>
             <h1 className="flex text-4xl font-bold justify-center text-green-800 px-20 mt-5 mb-10">
@@ -23,6 +22,7 @@ export default function CarOwnerDashboardHome() {
                     <Link
                         key={id}
                         to={to}
+                        title={text}
                         className={`flex justify-center items-center h-40 rounded-lg font-bold text-xl ${color}`}
                     >
                         {text}
