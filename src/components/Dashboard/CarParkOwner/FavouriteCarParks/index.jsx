@@ -1,4 +1,8 @@
 import TopTitleBar from "../../../TopTitleBar";
+import {useState} from "react";
+import ReactPaginate from "react-paginate";
+
+const PER_PAGE = 2;
 
 const parkingSpots = [
     {
@@ -28,16 +32,26 @@ const parkingSpots = [
 ];
 
 export default function FavouriteCarParks() {
-    return (
-        <div>
+    const [currentPage, setCurrentPage] = useState(0);
+
+    const offset = currentPage * PER_PAGE;
+    const pageCount = Math.ceil(parkingSpots.length / PER_PAGE);
+
+    const handlePageClick = ({selected: selectedPage}) => {
+        console.log("Selected Page", selectedPage);
+        setCurrentPage(selectedPage);
+    };
+
+    return (<div>
             <TopTitleBar title="Favourite Car Parks"/>
             <div className="p-5 bg-white rounded-xl mx-5">
                 <div className="flex flex-col space-y-4">
-                    {parkingSpots.map((spot) => (
-                        <div key={spot.id} className="flex rounded-lg bg-light-gray">
+                    {parkingSpots
+                        .slice(offset, offset + PER_PAGE)
+                        .map((spot) => (<div key={spot.id} className="flex rounded-lg bg-light-gray">
                             <div className="flex basis-1/4 items-center">
                                 <img
-                                    className="object-cover h-48 w-96 rounded-lg"
+                                    className="object-cover h-44 w-96 rounded-lg"
                                     src={spot.image}
                                     alt={spot.carParkOwnerName}
                                 />
@@ -52,8 +66,23 @@ export default function FavouriteCarParks() {
                                 <h6 className="text-md font-bold">Address: {spot.address}</h6>
                                 <h6 className="text-md font-bold">Feedbacks: {spot.feedbacks}</h6>
                             </div>
-                        </div>
-                    ))}
+                        </div>))}
+                    <div className="">
+                        <ReactPaginate
+                            previousLabel={"← Previous"}
+                            nextLabel={"Next →"}
+                            pageCount={pageCount}
+                            onPageChange={handlePageClick}
+                            containerClassName="my-2 flex flex-start content-center justify-center"
+                            pageClassName={""}
+                            pageLinkClassName="px-2 py-1 mx-2 border rounded-md border-black"
+                            previousLinkClassName={"px-2 py-1 mx-2 border rounded-md border-gray-300"}
+                            nextLinkClassName={"px-2 py-1 mx-2 border rounded-md border-gray-300"}
+                            disabledClassName={""}
+                            disabledLinkClassName={"px-2 py 1 mx-2 border rounded-md border-gray-300 bg-gray-300 text-gray-600"}
+                            activeLinkClassName={"text-white bg-black"}
+                        />
+                    </div>
                 </div>
             </div>
         </div>
