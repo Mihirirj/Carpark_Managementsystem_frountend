@@ -34,7 +34,7 @@ const parkingSpots = [
 export default function ViewCarParks() {
     return (
         <div>
-            <TopTitleBar/>
+            <TopTitleBar title="My Car parks"/>
             <div className="p-5 bg-white rounded-xl mx-5">
                 <div className="flex flex-col space-y-4">
                     {parkingSpots.map((spot) => (
