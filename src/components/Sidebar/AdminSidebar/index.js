@@ -38,7 +38,7 @@ const navLinks = [
     },
     {
         id: 6,
-        to: ROUTES.logout,
+        to: ROUTES.adminDashboardScanQRCode,
         icon: <AiFillSetting size={25}/>,
         label: "Setting"
     },
