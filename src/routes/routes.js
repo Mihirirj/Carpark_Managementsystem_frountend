@@ -6,7 +6,12 @@ const BASE_ROUTES = {
     dashboard: 'dashboard',
     incomeReport: 'income-report',
     viewCarParks: 'view-car-parks',
+    reservations: 'reservations',
+    userDetails: 'user-details',
+    feedbacks: 'feedbacks',
     booking: 'booking',
+    registerCarPark: 'register-car-park',
+    favouriteCarParks: 'favourite-car-parks',
     carParkOwnerDashboard: 'car-park-owner-dashboard',
     carParkUserDashboard: 'car-park-user-dashboard',
     logout: 'logout',
@@ -17,6 +22,11 @@ const carParkOwnerDashboardRoutes = {
     dashboard: `${BASE_ROUTES.dashboard}`,
     incomeReport: `${BASE_ROUTES.dashboard}/${BASE_ROUTES.incomeReport}`,
     viewCarParks: `${BASE_ROUTES.dashboard}/${BASE_ROUTES.viewCarParks}`,
+    reservations: `${BASE_ROUTES.dashboard}/${BASE_ROUTES.reservations}`,
+    userDetails: `${BASE_ROUTES.dashboard}/${BASE_ROUTES.userDetails}`,
+    feedbacks: `${BASE_ROUTES.dashboard}/${BASE_ROUTES.feedbacks}`,
+    favouriteCarParks: `${BASE_ROUTES.dashboard}/${BASE_ROUTES.favouriteCarParks}`,
+    registerCarPark: `${BASE_ROUTES.dashboard}/${BASE_ROUTES.registerCarPark}`,
 };
 
 const carParkUserDashboardRoutes = {
@@ -30,6 +40,11 @@ const ROUTES = {
     carParkOwnerDashboardDashboard: `/${BASE_ROUTES.carParkOwnerDashboard}/${carParkOwnerDashboardRoutes.dashboard}`,
     carParkOwnerIncomeReport: `/${BASE_ROUTES.carParkOwnerDashboard}/${carParkOwnerDashboardRoutes.incomeReport}`,
     carParkOwnerViewCarParks: `/${BASE_ROUTES.carParkOwnerDashboard}/${carParkOwnerDashboardRoutes.viewCarParks}`,
+    carParkOwnerReservations: `/${BASE_ROUTES.carParkOwnerDashboard}/${carParkOwnerDashboardRoutes.reservations}`,
+    carParkOwnerUserDetails: `/${BASE_ROUTES.carParkOwnerDashboard}/${carParkOwnerDashboardRoutes.userDetails}`,
+    carParkOwnerFeedbacks: `/${BASE_ROUTES.carParkOwnerDashboard}/${carParkOwnerDashboardRoutes.feedbacks}`,
+    carParkOwnerFavouriteCarParks: `/${BASE_ROUTES.carParkOwnerDashboard}/${carParkOwnerDashboardRoutes.favouriteCarParks}`,
+    carParkOwnerRegisterCarPark: `/${BASE_ROUTES.carParkOwnerDashboard}/${carParkOwnerDashboardRoutes.registerCarPark}`,
 
     carParkUserDashboard: `/${BASE_ROUTES.carParkUserDashboard}`,
     carParkUserDashboardHome: `/${BASE_ROUTES.carParkUserDashboard}/${carParkUserDashboardRoutes.home}`,
