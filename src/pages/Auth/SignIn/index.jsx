@@ -1,5 +1,7 @@
 import {ErrorMessage, Field, Form, Formik} from 'formik';
 import * as Yup from 'yup';
+import {ROUTES} from "../../../routes/routes";
+import {Link, useNavigation} from "react-router-dom";
 
 const validationSchema = Yup.object({
     username: Yup.string().required('Required'),
@@ -11,7 +13,17 @@ const userInputFields = [
     {id: "password", text: "Password", type: "password"},
 ];
 
+const initialValues = {
+    username: '',
+    password: ''
+}
+
 export default function SignIn() {
+
+    const handleSubmit = (values) => {
+        console.log(values);
+    }
+
     return (
         <div className="flex justify-center items-center bg-client-home bg-cover bg-center h-screen">
             <div className="bg-dark-gray w-96 p-4 rounded-lg">
@@ -20,14 +32,9 @@ export default function SignIn() {
                 </div>
                 <hr className="my-5"/>
                 <Formik
-                    initialValues={{
-                        username: '',
-                        password: ''
-                    }}
+                    initialValues={initialValues}
                     validationSchema={validationSchema}
-                    onSubmit={(values) => {
-                        console.log(values);
-                    }}
+                    onSubmit={handleSubmit}
                 >
                     {({errors, touched}) => (
                         <Form>
@@ -47,6 +54,9 @@ export default function SignIn() {
                                         title="Sign In">Sign In
                                 </button>
                             </div>
+                            <Link to={ROUTES.userSignUp} className="flex justify-center">
+                                <h3 className="mt-4">Don't have an Account? Please Sign Up</h3>
+                            </Link>
                         </Form>
                     )}
                 </Formik>

@@ -1,5 +1,7 @@
 import {ErrorMessage, Field, Form, Formik} from 'formik';
 import * as Yup from 'yup';
+import {Link} from "react-router-dom";
+import {ROUTES} from "../../../routes/routes";
 
 const validationSchema = Yup.object({
     username: Yup.string().required('Required'),
@@ -111,6 +113,9 @@ export default function SignUp() {
                                     Sign Up
                                 </button>
                             </div>
+                            <Link to={ROUTES.userSignIn} className="flex justify-center">
+                                <h3 className="mt-4">Already have an Account? Please Sign In</h3>
+                            </Link>
                         </Form>
                     )}
                 </Formik>

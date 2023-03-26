@@ -59,6 +59,11 @@ const adminDashboardRoutes = {
     scanQRCode: `${BASE_ROUTES.scanQRCode}`,
 }
 
+const userRoutes = {
+    signIn: `/${BASE_ROUTES.signIn}`,
+    signUp: `/${BASE_ROUTES.signUp}`,
+}
+
 const ROUTES = {
     carParkOwnerDashboard: `/${BASE_ROUTES.carParkOwnerDashboard}`,
     carParkOwnerDashboardHome: `/${BASE_ROUTES.carParkOwnerDashboard}/${carParkOwnerDashboardRoutes.home}`,
@@ -87,6 +92,9 @@ const ROUTES = {
     adminDashboardViewCarParkRegistration: `/${BASE_ROUTES.adminDashboard}/${adminDashboardRoutes.viewCarParkRegistration}`,
     adminDashboardPayment: `/${BASE_ROUTES.adminDashboard}/${adminDashboardRoutes.payment}`,
     adminDashboardScanQRCode: `/${BASE_ROUTES.adminDashboard}/${adminDashboardRoutes.scanQRCode}`,
+
+    userSignIn: `/${BASE_ROUTES.signIn}`,
+    userSignUp: `/${BASE_ROUTES.signUp}`,
 
     logout: `/${BASE_ROUTES.logout}`,
     view: `/${BASE_ROUTES.view}`,
