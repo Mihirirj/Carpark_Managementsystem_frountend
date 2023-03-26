@@ -27,6 +27,15 @@ import AdminDashboardPayment from "../components/Dashboard/Admin/AdminDashboardP
 import ScanQRCode from "../components/Dashboard/Admin/ScanQRCode";
 import SignIn from "../pages/Auth/SignIn";
 import SignUp from "../pages/Auth/SIgnUp";
+import CarParkUserBooking from "../components/Dashboard/CarParkUser/CarParkUserBooking";
+import AdminDashboardBooking from "../components/Dashboard/Admin/AdminDashboardBooking";
+import AdminDashboardReport from "../components/Dashboard/Admin/AdminDashboardReport";
+import CarParkOwnerDashboardViewAll from "../components/Dashboard/CarParkOwner/CarParkOwnerDashboardViewAll";
+import CarParkOwnerSetting from "../components/Dashboard/CarParkOwner/CarParkOwnerSetting";
+import CarParkUserPayment from "../components/Dashboard/CarParkUser/CarParkUserPayment";
+import CarParkUserDashboardContact from "../components/Dashboard/CarParkUser/CarParkUserDashboardContact";
+import CarParkUserDashboardHelp from "../components/Dashboard/CarParkUser/CarParkUserDashboardHelp";
+import CarParkUserDashboardSetting from "../components/Dashboard/CarParkUser/CarParkUserDashboardSetting";
 
 export default function Router() {
     return (<BrowserRouter>
@@ -47,9 +56,18 @@ export default function Router() {
                            element={<FavouriteCarParks/>}/>
                     <Route path={`${BASE_ROUTES.dashboard}/${BASE_ROUTES.registerCarPark}`}
                            element={<RegisterCarPark/>}/>
+                    <Route path={BASE_ROUTES.viewAll}
+                           element={<CarParkOwnerDashboardViewAll/>}/>
+                    <Route path={BASE_ROUTES.setting}
+                           element={<CarParkOwnerSetting/>}/>
                 </Route>
                 <Route path={BASE_ROUTES.carParkUserDashboard} element={<CarParkUserDashboard/>}>
                     <Route path={BASE_ROUTES.home} element={<CarParkUserDashboardHome/>}/>
+                    <Route path={BASE_ROUTES.booking} element={<CarParkUserBooking/>}/>
+                    <Route path={BASE_ROUTES.payment} element={<CarParkUserPayment/>}/>
+                    <Route path={BASE_ROUTES.contact} element={<CarParkUserDashboardContact/>}/>
+                    <Route path={BASE_ROUTES.help} element={<CarParkUserDashboardHelp/>}/>
+                    <Route path={BASE_ROUTES.setting} element={<CarParkUserDashboardSetting/>}/>
                 </Route>
                 <Route path={BASE_ROUTES.carParkUserDashboard} element={<CarParkUserDashboardWithNavbar/>}>
                     <Route path={BASE_ROUTES.map} element={<CarParkUserMap/>}/>
@@ -72,7 +90,11 @@ export default function Router() {
                     <Route path={BASE_ROUTES.payment}
                            element={<AdminDashboardPayment/>}/>
                     <Route path={BASE_ROUTES.scanQRCode}
-                            element={<ScanQRCode/>}/>
+                           element={<ScanQRCode/>}/>
+                    <Route path={BASE_ROUTES.booking}
+                           element={<AdminDashboardBooking/>}/>
+                    <Route path={BASE_ROUTES.report}
+                           element={<AdminDashboardReport/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

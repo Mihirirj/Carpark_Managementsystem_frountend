@@ -1,7 +1,7 @@
 import {ErrorMessage, Field, Form, Formik} from 'formik';
 import * as Yup from 'yup';
 import {ROUTES} from "../../../routes/routes";
-import {Link, useNavigation} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const validationSchema = Yup.object({
     username: Yup.string().required('Required'),

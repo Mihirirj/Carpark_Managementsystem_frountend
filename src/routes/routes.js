@@ -12,8 +12,12 @@ const BASE_ROUTES = {
     userDetails: 'user-details',
     feedbacks: 'feedbacks',
     booking: 'booking',
+    contact: 'contact',
     map: 'map',
+    report: 'report',
     payment: 'payment',
+    viewAll: 'view-all',
+    help: 'help',
     parkingSlotsList: 'parking-slots-list',
     parkingOwnersList: 'parking-owners-list',
     vehicleOwnersList: 'vehicle-owners-list',
@@ -38,12 +42,18 @@ const carParkOwnerDashboardRoutes = {
     feedbacks: `${BASE_ROUTES.dashboard}/${BASE_ROUTES.feedbacks}`,
     favouriteCarParks: `${BASE_ROUTES.dashboard}/${BASE_ROUTES.favouriteCarParks}`,
     registerCarPark: `${BASE_ROUTES.dashboard}/${BASE_ROUTES.registerCarPark}`,
+    viewAll: `${BASE_ROUTES.viewAll}`,
+    setting: `${BASE_ROUTES.setting}`,
 };
 
 const carParkUserDashboardRoutes = {
     home: `${BASE_ROUTES.home}`,
     booking: `${BASE_ROUTES.booking}`,
     map: `${BASE_ROUTES.map}`,
+    payment: `${BASE_ROUTES.payment}`,
+    contact: `${BASE_ROUTES.contact}`,
+    help: `${BASE_ROUTES.help}`,
+    setting: `${BASE_ROUTES.setting}`,
 };
 
 const adminDashboardRoutes = {
@@ -57,6 +67,7 @@ const adminDashboardRoutes = {
     viewCarParkRegistration: `${BASE_ROUTES.dashboard}/${BASE_ROUTES.viewCarParkRegistration}`,
     payment: `${BASE_ROUTES.payment}`,
     scanQRCode: `${BASE_ROUTES.scanQRCode}`,
+    report: `${BASE_ROUTES.report}`,
 }
 
 const userRoutes = {
@@ -75,11 +86,17 @@ const ROUTES = {
     carParkOwnerFeedbacks: `/${BASE_ROUTES.carParkOwnerDashboard}/${carParkOwnerDashboardRoutes.feedbacks}`,
     carParkOwnerFavouriteCarParks: `/${BASE_ROUTES.carParkOwnerDashboard}/${carParkOwnerDashboardRoutes.favouriteCarParks}`,
     carParkOwnerRegisterCarPark: `/${BASE_ROUTES.carParkOwnerDashboard}/${carParkOwnerDashboardRoutes.registerCarPark}`,
+    carParkOwnerViewAll: `/${BASE_ROUTES.carParkOwnerDashboard}/${carParkOwnerDashboardRoutes.viewAll}`,
+    carParkOwnerSetting: `/${BASE_ROUTES.carParkOwnerDashboard}/${carParkOwnerDashboardRoutes.setting}`,
 
     carParkUserDashboard: `/${BASE_ROUTES.carParkUserDashboard}`,
     carParkUserDashboardHome: `/${BASE_ROUTES.carParkUserDashboard}/${carParkUserDashboardRoutes.home}`,
     carParkUserDashboardBooking: `/${BASE_ROUTES.carParkUserDashboard}/${carParkUserDashboardRoutes.booking}`,
     carParkUserDashboardMap: `/${BASE_ROUTES.carParkUserDashboard}/${carParkUserDashboardRoutes.map}`,
+    carParkUserDashboardPayment: `/${BASE_ROUTES.carParkUserDashboard}/${carParkUserDashboardRoutes.payment}`,
+    carParkUserDashboardContact: `/${BASE_ROUTES.carParkUserDashboard}/${carParkUserDashboardRoutes.contact}`,
+    carParkUserDashboardHelp: `/${BASE_ROUTES.carParkUserDashboard}/${carParkUserDashboardRoutes.help}`,
+    carParkUserDashboardSetting: `/${BASE_ROUTES.carParkUserDashboard}/${carParkUserDashboardRoutes.setting}`,
 
     adminDashboard: `/${BASE_ROUTES.adminDashboard}`,
     adminDashboardHome: `/${BASE_ROUTES.adminDashboard}/${adminDashboardRoutes.home}`,
@@ -92,6 +109,7 @@ const ROUTES = {
     adminDashboardViewCarParkRegistration: `/${BASE_ROUTES.adminDashboard}/${adminDashboardRoutes.viewCarParkRegistration}`,
     adminDashboardPayment: `/${BASE_ROUTES.adminDashboard}/${adminDashboardRoutes.payment}`,
     adminDashboardScanQRCode: `/${BASE_ROUTES.adminDashboard}/${adminDashboardRoutes.scanQRCode}`,
+    adminDashboardReport: `/${BASE_ROUTES.adminDashboard}/${adminDashboardRoutes.report}`,
 
     userSignIn: `/${BASE_ROUTES.signIn}`,
     userSignUp: `/${BASE_ROUTES.signUp}`,

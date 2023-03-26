@@ -32,7 +32,7 @@ const navLinks = [
     },
     {
         id: 5,
-        to: ROUTES.setting,
+        to: ROUTES.adminDashboardReport,
         icon: <MdWifiCalling size={25}/>,
         label: "Report"
     },

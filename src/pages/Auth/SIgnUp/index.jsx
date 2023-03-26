@@ -55,7 +55,7 @@ export default function SignUp() {
                 >
                     {({errors, touched}) => (
                         <Form>
-                            <div className="flex flex-col gap-y-4">
+                            <div className="flex flex-col">
                                 {userInputFields.map((credential) => (
                                     <div key={credential.id}>
                                         <label

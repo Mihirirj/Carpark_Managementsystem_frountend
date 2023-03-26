@@ -18,13 +18,13 @@ const navLinks = [
     },
     {
         id: 3,
-        to: ROUTES.view,
+        to: ROUTES.carParkOwnerViewAll,
         icon: <AiFillEye size={25}/>,
         label: "View All"
     },
     {
         id: 4,
-        to: ROUTES.setting,
+        to: ROUTES.carParkOwnerSetting,
         icon: <AiFillSetting size={25}/>,
         label: "Settings"
     },

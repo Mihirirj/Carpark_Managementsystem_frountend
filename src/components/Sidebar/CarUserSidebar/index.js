@@ -20,25 +20,25 @@ const navLinks = [
     },
     {
         id: 3,
-        to: ROUTES.view,
+        to: ROUTES.carParkUserDashboardPayment,
         icon: <MdPayments size={25}/>,
         label: "Payment"
     },
     {
         id: 4,
-        to: ROUTES.setting,
+        to: ROUTES.carParkUserDashboardContact,
         icon: <MdWifiCalling size={25}/>,
         label: "Contact"
     },
     {
         id: 5,
-        to: ROUTES.logout,
+        to: ROUTES.carParkUserDashboardHelp,
         icon: <MdOutlineHelp size={25}/>,
         label: "Help"
     },
     {
         id: 6,
-        to: ROUTES.logout,
+        to: ROUTES.carParkUserDashboardSetting,
         icon: <AiFillSetting size={25}/>,
         label: "Setting"
     },
