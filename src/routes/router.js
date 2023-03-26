@@ -24,6 +24,7 @@ import VehicleOwnersList from "../components/Dashboard/Admin/VehicleOwnersList";
 import SlotRegistrationRequestsList from "../components/Dashboard/Admin/SlotRegistrationRequestsList";
 import ViewCarParkRegistration from "../components/Dashboard/Admin/ViewCarParkRegistration";
 import AdminDashboardPayment from "../components/Dashboard/Admin/AdminDashboardPayment";
+import ScanQRCode from "../components/Dashboard/Admin/ScanQRCode";
 
 export default function Router() {
     return (<BrowserRouter>
@@ -66,6 +67,8 @@ export default function Router() {
                            element={<ViewCarParkRegistration/>}/>
                     <Route path={BASE_ROUTES.payment}
                            element={<AdminDashboardPayment/>}/>
+                    <Route path={BASE_ROUTES.scanQRCode}
+                            element={<ScanQRCode/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

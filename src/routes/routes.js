@@ -15,6 +15,7 @@ const BASE_ROUTES = {
     parkingSlotsList: 'parking-slots-list',
     parkingOwnersList: 'parking-owners-list',
     vehicleOwnersList: 'vehicle-owners-list',
+    scanQRCode: 'scan-qr-code',
     slotRegistrationRequestsList: 'slot-registration-requests-list',
     viewCarParkRegistration: 'view-car-park-registration',
     registerCarPark: 'register-car-park',
@@ -53,6 +54,7 @@ const adminDashboardRoutes = {
     slotRegistrationRequestsList: `${BASE_ROUTES.dashboard}/${BASE_ROUTES.slotRegistrationRequestsList}`,
     viewCarParkRegistration: `${BASE_ROUTES.dashboard}/${BASE_ROUTES.viewCarParkRegistration}`,
     payment: `${BASE_ROUTES.payment}`,
+    scanQRCode: `${BASE_ROUTES.scanQRCode}`,
 }
 
 const ROUTES = {
@@ -82,6 +84,7 @@ const ROUTES = {
     adminDashboardSlotRegistrationRequestsList: `/${BASE_ROUTES.adminDashboard}/${adminDashboardRoutes.slotRegistrationRequestsList}`,
     adminDashboardViewCarParkRegistration: `/${BASE_ROUTES.adminDashboard}/${adminDashboardRoutes.viewCarParkRegistration}`,
     adminDashboardPayment: `/${BASE_ROUTES.adminDashboard}/${adminDashboardRoutes.payment}`,
+    adminDashboardScanQRCode: `/${BASE_ROUTES.adminDashboard}/${adminDashboardRoutes.scanQRCode}`,
 
     logout: `/${BASE_ROUTES.logout}`,
     view: `/${BASE_ROUTES.view}`,
