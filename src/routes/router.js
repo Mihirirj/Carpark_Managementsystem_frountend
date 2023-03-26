@@ -25,11 +25,15 @@ import SlotRegistrationRequestsList from "../components/Dashboard/Admin/SlotRegi
 import ViewCarParkRegistration from "../components/Dashboard/Admin/ViewCarParkRegistration";
 import AdminDashboardPayment from "../components/Dashboard/Admin/AdminDashboardPayment";
 import ScanQRCode from "../components/Dashboard/Admin/ScanQRCode";
+import SignIn from "../pages/Auth/SignIn";
+import SignUp from "../pages/Auth/SIgnUp";
 
 export default function Router() {
     return (<BrowserRouter>
             <Routes>
                 <Route path={BASE_ROUTES.init} element={<Home/>}/>
+                <Route path={BASE_ROUTES.signIn} element={<SignIn/>}/>
+                <Route path={BASE_ROUTES.signUp} element={<SignUp/>}/>
                 <Route path={BASE_ROUTES.logout} element={<Home/>}/>
                 <Route path={BASE_ROUTES.carParkOwnerDashboard} element={<CarParkOwnerDashboard/>}>
                     <Route path={BASE_ROUTES.home} element={<CarParkOwnerDashboardHome/>}/>

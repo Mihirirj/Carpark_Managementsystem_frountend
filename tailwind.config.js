@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
     content: [
         "./src/**/*.{js,jsx,ts,tsx}",
@@ -17,6 +18,10 @@ module.exports = {
                 'dark-blue-100': 'rgba(44, 125, 160, 0.9)',
                 'dark-blue-200': 'rgba(65, 90, 119, 0.7)',
             },
+            backgroundImage: {
+                'client-home': "url('https://static.wixstatic.com/media/nsplsh_484e435343705772564a41~mv2_d_3519_5281_s_4_2.jpg/v1/fill/w_640,h_482,fp_0.50_0.50,q_80,usm_0.66_1.00_0.01,enc_auto/nsplsh_484e435343705772564a41~mv2_d_3519_5281_s_4_2.jpg')",
+                'footer-texture': "url('/img/footer-texture.png')",
+            }
         },
     },
     plugins: [],
