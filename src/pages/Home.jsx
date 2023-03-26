@@ -2,17 +2,18 @@ import {Link} from "react-router-dom";
 
 export default function Home() {
     return (
-        <div>
-            <h1 className="text-3xl font-bold underline">Home</h1>
-            <Link to="/car-park-owner-dashboard/home">Car Park Owner Dashboard</Link>
-            <br/>
-            <Link to="/car-park-user-dashboard/home">Car Park User Dashboard</Link>
-            <br/>
-            <Link to="/admin-dashboard/home">Admin Dashboard</Link>
-            <br/>
-            <Link to="/sign-up">Sign Up</Link>
-            <br/>
-            <Link to="/sign-in">Sign In</Link>
+        <div className="flex flex-col justify-center items-center h-96 gap-y-10">
+            <h1 className="flex justify-center text-3xl font-bold underline">Home Navigation</h1>
+            <div className="grid grid-cols-5 gap-x-10">
+                <Link to="/car-park-owner-dashboard/dashboard" className="flex justify-center bg-purple-500 p-3 rounded-lg">Car
+                    Park Owner Dashboard</Link>
+                <Link to="/car-park-user-dashboard/home" className="flex justify-center bg-purple-500 p-3 rounded-lg">Car
+                    Park User Dashboard</Link>
+                <Link to="/admin-dashboard/home" className="flex justify-center bg-purple-500 p-3 rounded-lg">Admin
+                    Dashboard</Link>
+                <Link to="/sign-up" className="flex justify-center bg-purple-500 p-3 rounded-lg">Sign Up</Link>
+                <Link to="/sign-in" className="flex justify-center bg-purple-500 p-3 rounded-lg">Sign In</Link>
+            </div>
         </div>
     );
 }
