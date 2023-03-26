@@ -23,6 +23,7 @@ import ParkingOwnersList from "../components/Dashboard/Admin/ParkingOwnersList";
 import VehicleOwnersList from "../components/Dashboard/Admin/VehicleOwnersList";
 import SlotRegistrationRequestsList from "../components/Dashboard/Admin/SlotRegistrationRequestsList";
 import ViewCarParkRegistration from "../components/Dashboard/Admin/ViewCarParkRegistration";
+import AdminDashboardPayment from "../components/Dashboard/Admin/AdminDashboardPayment";
 
 export default function Router() {
     return (<BrowserRouter>
@@ -63,6 +64,8 @@ export default function Router() {
                            element={<SlotRegistrationRequestsList/>}/>
                     <Route path={`${BASE_ROUTES.dashboard}/${BASE_ROUTES.viewCarParkRegistration}/:id`}
                            element={<ViewCarParkRegistration/>}/>
+                    <Route path={BASE_ROUTES.payment}
+                           element={<AdminDashboardPayment/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>
