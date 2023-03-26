@@ -9,6 +9,10 @@ export default function Home() {
             <Link to="/car-park-user-dashboard/home">Car Park User Dashboard</Link>
             <br/>
             <Link to="/admin-dashboard/home">Admin Dashboard</Link>
+            <br/>
+            <Link to="/sign-up">Sign Up</Link>
+            <br/>
+            <Link to="/sign-in">Sign In</Link>
         </div>
     );
 }

@@ -1,6 +1,8 @@
 const BASE_ROUTES = {
     init: '',
     home: 'home',
+    signIn: 'sign-in',
+    signUp: 'sign-up',
     view: 'view',
     setting: 'setting',
     dashboard: 'dashboard',
