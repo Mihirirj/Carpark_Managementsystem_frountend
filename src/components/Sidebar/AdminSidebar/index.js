@@ -26,7 +26,7 @@ const navLinks = [
     },
     {
         id: 4,
-        to: ROUTES.view,
+        to: ROUTES.adminDashboardPayment,
         icon: <MdPayments size={25}/>,
         label: "Payment"
     },

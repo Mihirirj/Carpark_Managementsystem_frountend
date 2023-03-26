@@ -11,6 +11,7 @@ module.exports = {
                 'dark-green': 'rgba(0, 100, 0, 1)',
                 'dark-green-100': 'rgba(0, 75, 35, 0.6)',
                 'dark-purple': 'rgba(62, 31, 71, 0.65)',
+                'light-purple-100': 'rgba(165, 165, 255, 1)',
                 'light-blue': 'rgba(165, 255, 214, 1)',
                 'dark-blue': 'rgba(76, 201, 240, 0.9)',
                 'dark-blue-100': 'rgba(44, 125, 160, 0.9)',

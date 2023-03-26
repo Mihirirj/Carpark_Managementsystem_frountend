@@ -11,6 +11,7 @@ const BASE_ROUTES = {
     feedbacks: 'feedbacks',
     booking: 'booking',
     map: 'map',
+    payment: 'payment',
     parkingSlotsList: 'parking-slots-list',
     parkingOwnersList: 'parking-owners-list',
     vehicleOwnersList: 'vehicle-owners-list',
@@ -51,6 +52,7 @@ const adminDashboardRoutes = {
     vehicleOwnersList: `${BASE_ROUTES.dashboard}/${BASE_ROUTES.vehicleOwnersList}`,
     slotRegistrationRequestsList: `${BASE_ROUTES.dashboard}/${BASE_ROUTES.slotRegistrationRequestsList}`,
     viewCarParkRegistration: `${BASE_ROUTES.dashboard}/${BASE_ROUTES.viewCarParkRegistration}`,
+    payment: `${BASE_ROUTES.payment}`,
 }
 
 const ROUTES = {
@@ -79,6 +81,7 @@ const ROUTES = {
     adminDashboardVehicleOwnersList: `/${BASE_ROUTES.adminDashboard}/${adminDashboardRoutes.vehicleOwnersList}`,
     adminDashboardSlotRegistrationRequestsList: `/${BASE_ROUTES.adminDashboard}/${adminDashboardRoutes.slotRegistrationRequestsList}`,
     adminDashboardViewCarParkRegistration: `/${BASE_ROUTES.adminDashboard}/${adminDashboardRoutes.viewCarParkRegistration}`,
+    adminDashboardPayment: `/${BASE_ROUTES.adminDashboard}/${adminDashboardRoutes.payment}`,
 
     logout: `/${BASE_ROUTES.logout}`,
     view: `/${BASE_ROUTES.view}`,
