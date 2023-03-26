@@ -7,6 +7,7 @@ import {GrUserSettings} from "react-icons/gr";
 import {Link} from "react-router-dom";
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
+import {ROUTES} from "../../../../routes/routes";
 
 const animatedComponents = makeAnimated();
 
@@ -26,37 +27,37 @@ const menuItems = [
         id: 1,
         label: "Target the nearest car parks",
         icon: <FaParking size={25}/>,
-        link: "/parking",
+        link: ROUTES.carParkUserDashboardMap,
     },
     {
         id: 2,
         label: "Alerts and Notifications",
         icon: <TbBellRingingFilled size={25}/>,
-        link: "/parking",
+        link: ROUTES.carParkUserDashboardMap,
     },
     {
         id: 3,
         label: "Parking Countdown",
         icon: <RxCountdownTimer size={25}/>,
-        link: "/parking",
+        link: ROUTES.carParkUserDashboardMap,
     },
     {
         id: 4,
         label: "Find and book the suitable parking",
         icon: <TfiMapAlt size={25}/>,
-        link: "/parking",
+        link: ROUTES.carParkUserDashboardMap,
     },
     {
         id: 5,
         label: "Search History",
         icon: <MdOutlineScreenSearchDesktop size={25}/>,
-        link: "/parking",
+        link: ROUTES.carParkUserDashboardMap,
     },
     {
         id: 6,
         label: "Manage Your Profile",
         icon: <GrUserSettings size={25}/>,
-        link: "/parking",
+        link: ROUTES.carParkUserDashboardMap,
     },
 ];
 
@@ -134,7 +135,7 @@ export default function CarParkUserDashboardHome() {
                 <div className="grid grid-cols-3 gap-x-10 gap-y-4 mt-10">
                     {menuItems.map(({id, label, icon, link}) => (
                         <Link to={link} key={id}
-                              className="flex items-center justify-center bg-gray-100 py-8 rounded-lg">
+                              className="flex items-center justify-center bg-light-gray py-8 rounded-lg">
                             {icon}
                             <h3 className="ml-4">{label}</h3>
                         </Link>

@@ -48,25 +48,27 @@ export default function FavouriteCarParks() {
                 <div className="flex flex-col space-y-4">
                     {parkingSpots
                         .slice(offset, offset + PER_PAGE)
-                        .map((spot) => (<div key={spot.id} className="flex rounded-lg bg-light-gray">
-                            <div className="flex basis-1/4 items-center">
-                                <img
-                                    className="object-cover h-44 w-96 rounded-lg"
-                                    src={spot.image}
-                                    alt={spot.carParkOwnerName}
-                                />
-                            </div>
-                            <div className="flex flex-col basis-3/4 px-6 justify-center gap-y-4">
-                                <h6 className="text-md font-bold">Car Park Owner: {spot.carParkOwnerName}</h6>
-                                <div className="flex">
-                                    <h6 className="text-md text-dark-green font-bold">
-                                        Name of the Parking Spot: {spot.parkName}
-                                    </h6>
+                        .map((spot) => (
+                            <div key={spot.id} className="flex rounded-lg bg-light-gray">
+                                <div className="flex basis-1/4 items-center">
+                                    <img
+                                        className="object-cover h-44 w-96 rounded-lg"
+                                        src={spot.image}
+                                        alt={spot.carParkOwnerName}
+                                    />
                                 </div>
-                                <h6 className="text-md font-bold">Address: {spot.address}</h6>
-                                <h6 className="text-md font-bold">Feedbacks: {spot.feedbacks}</h6>
+                                <div className="flex flex-col basis-3/4 px-6 justify-center gap-y-4">
+                                    <h6 className="text-md font-bold">Car Park Owner: {spot.carParkOwnerName}</h6>
+                                    <div className="flex">
+                                        <h6 className="text-md text-dark-green font-bold">
+                                            Name of the Parking Spot: {spot.parkName}
+                                        </h6>
+                                    </div>
+                                    <h6 className="text-md font-bold">Address: {spot.address}</h6>
+                                    <h6 className="text-md font-bold">Feedbacks: {spot.feedbacks}</h6>
+                                </div>
                             </div>
-                        </div>))}
+                        ))}
                     <div className="">
                         <ReactPaginate
                             previousLabel={"← Previous"}

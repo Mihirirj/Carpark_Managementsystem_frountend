@@ -10,6 +10,7 @@ const BASE_ROUTES = {
     userDetails: 'user-details',
     feedbacks: 'feedbacks',
     booking: 'booking',
+    map: 'map',
     registerCarPark: 'register-car-park',
     favouriteCarParks: 'favourite-car-parks',
     carParkOwnerDashboard: 'car-park-owner-dashboard',
@@ -32,6 +33,7 @@ const carParkOwnerDashboardRoutes = {
 const carParkUserDashboardRoutes = {
     home: `${BASE_ROUTES.home}`,
     booking: `${BASE_ROUTES.booking}`,
+    map: `${BASE_ROUTES.map}`,
 };
 
 const ROUTES = {
@@ -49,6 +51,7 @@ const ROUTES = {
     carParkUserDashboard: `/${BASE_ROUTES.carParkUserDashboard}`,
     carParkUserDashboardHome: `/${BASE_ROUTES.carParkUserDashboard}/${carParkUserDashboardRoutes.home}`,
     carParkUserDashboardBooking: `/${BASE_ROUTES.carParkUserDashboard}/${carParkUserDashboardRoutes.booking}`,
+    carParkUserDashboardMap: `/${BASE_ROUTES.carParkUserDashboard}/${carParkUserDashboardRoutes.map}`,
 
     logout: `/${BASE_ROUTES.logout}`,
     view: `/${BASE_ROUTES.view}`,

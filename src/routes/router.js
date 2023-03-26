@@ -13,6 +13,8 @@ import FavouriteCarParks from "../components/Dashboard/CarParkOwner/FavouriteCar
 import Home from "../pages/Home";
 import {BASE_ROUTES} from "./routes";
 import RegisterCarPark from "../components/Dashboard/CarParkOwner/RegisterCarPark";
+import CarParkUserDashboardWithNavbar from "../pages/CarParkUserDashboardWithNavbar";
+import CarParkUserMap from "../components/Dashboard/CarParkUser/CarParkUserMap";
 
 export default function Router() {
     return (<BrowserRouter>
@@ -34,6 +36,9 @@ export default function Router() {
                 </Route>
                 <Route path={BASE_ROUTES.carParkUserDashboard} element={<CarParkUserDashboard/>}>
                     <Route path={BASE_ROUTES.home} element={<CarParkUserDashboardHome/>}/>
+                </Route>
+                <Route path={BASE_ROUTES.carParkUserDashboard} element={<CarParkUserDashboardWithNavbar/>}>
+                    <Route path={BASE_ROUTES.map} element={<CarParkUserMap/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>
