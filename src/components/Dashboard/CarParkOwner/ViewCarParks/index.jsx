@@ -1,7 +1,8 @@
 import TopTitleBar from "../../../TopTitleBar";
 import ENUMS from "../../../../config/enums/enums";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import ReactPaginate from "react-paginate";
+import server from "../../../../config/apis/server";
 
 const PER_PAGE = 2;
 
@@ -45,6 +46,27 @@ export default function ViewCarParks() {
         console.log("Selected Page", selectedPage);
         setCurrentPage(selectedPage);
     };
+
+    const owner = {
+        userId: 1,
+        username: "akila@gmail.com",
+        password: "1234"
+    }
+
+    function getParks() {
+        server.get("/owner/get_all_parks/1" , {})
+            .then((res) => {
+                alert(res.data);
+                console.log("result : ", res.data);
+            })
+            .catch((err) => {
+                alert(err);
+            })
+    }
+
+    // useEffect(() => {
+    //     getParks();
+    // }, []);
 
     return (
         <div>

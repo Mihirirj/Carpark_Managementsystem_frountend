@@ -117,6 +117,8 @@ const ROUTES = {
     logout: `/${BASE_ROUTES.logout}`,
     view: `/${BASE_ROUTES.view}`,
     setting: `/${BASE_ROUTES.setting}`,
+
+    home: `/${BASE_ROUTES.init}`,
 };
 
 export {BASE_ROUTES, ROUTES};

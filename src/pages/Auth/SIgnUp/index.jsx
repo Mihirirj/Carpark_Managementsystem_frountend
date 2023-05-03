@@ -10,7 +10,7 @@ const validationSchema = Yup.object({
     confirmPassword: Yup.string()
         .oneOf([Yup.ref('password'), null], 'Passwords must match')
         .required('Required'),
-    userType: Yup.string().oneOf(['Admin', 'Car Park Owner', 'Car Park User'], 'Invalid User Type').required('Required')
+    userType: Yup.string().oneOf(['admin', 'carParkOwner', 'carParkUser']).required('Required')
 });
 
 const userInputFields = [
@@ -32,6 +32,10 @@ const userInputFields = [
 ];
 
 export default function SignUp() {
+    const handleSubmit = (values) => {
+        console.log(values);
+    };
+
     return (
         <div className="flex justify-center items-center bg-client-home bg-cover bg-center h-screen">
             <div className="bg-dark-gray w-96 p-4 rounded-lg">
@@ -45,13 +49,10 @@ export default function SignUp() {
                         email: "",
                         password: "",
                         confirmPassword: "",
-                        userType: "",
+                        userType: "carParkUser",
                     }}
                     validationSchema={validationSchema}
-                    onSubmit={(values) => {
-                        // Handle form submission here
-                        console.log(values);
-                    }}
+                    onSubmit={handleSubmit}
                 >
                     {({errors, touched}) => (
                         <Form>

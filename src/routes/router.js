@@ -36,11 +36,12 @@ import CarParkUserPayment from "../components/Dashboard/CarParkUser/CarParkUserP
 import CarParkUserDashboardContact from "../components/Dashboard/CarParkUser/CarParkUserDashboardContact";
 import CarParkUserDashboardHelp from "../components/Dashboard/CarParkUser/CarParkUserDashboardHelp";
 import CarParkUserDashboardSetting from "../components/Dashboard/CarParkUser/CarParkUserDashboardSetting";
+import HomePage from "../pages/HomePage";
 
 export default function Router() {
     return (<BrowserRouter>
             <Routes>
-                <Route path={BASE_ROUTES.init} element={<Home/>}/>
+                <Route path={BASE_ROUTES.init} element={<HomePage/>}/>
                 <Route path={BASE_ROUTES.signIn} element={<SignIn/>}/>
                 <Route path={BASE_ROUTES.signUp} element={<SignUp/>}/>
                 <Route path={BASE_ROUTES.logout} element={<Home/>}/>
