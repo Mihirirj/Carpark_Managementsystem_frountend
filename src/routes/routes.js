@@ -2,7 +2,7 @@ const BASE_ROUTES = {
     init: '',
     home: 'home',
     signIn: 'sign-in',
-    signUp: 'sign-up',
+    signUp: 'sign',
     view: 'view',
     setting: 'setting',
     dashboard: 'dashboard',
@@ -12,6 +12,7 @@ const BASE_ROUTES = {
     userDetails: 'user-details',
     feedbacks: 'feedbacks',
     booking: 'booking',
+    newBooking: 'newBooking',
     contact: 'contact',
     map: 'map',
     report: 'report',
@@ -54,6 +55,7 @@ const carParkUserDashboardRoutes = {
     contact: `${BASE_ROUTES.contact}`,
     help: `${BASE_ROUTES.help}`,
     setting: `${BASE_ROUTES.setting}`,
+    newBooking: `${BASE_ROUTES.newBooking}`,
 };
 
 const adminDashboardRoutes = {
@@ -97,6 +99,7 @@ const ROUTES = {
     carParkUserDashboardContact: `/${BASE_ROUTES.carParkUserDashboard}/${carParkUserDashboardRoutes.contact}`,
     carParkUserDashboardHelp: `/${BASE_ROUTES.carParkUserDashboard}/${carParkUserDashboardRoutes.help}`,
     carParkUserDashboardSetting: `/${BASE_ROUTES.carParkUserDashboard}/${carParkUserDashboardRoutes.setting}`,
+    carParkUserDashboardNewBooking: `/${BASE_ROUTES.carParkUserDashboard}/${carParkUserDashboardRoutes.newBooking}`,
 
     adminDashboard: `/${BASE_ROUTES.adminDashboard}`,
     adminDashboardHome: `/${BASE_ROUTES.adminDashboard}/${adminDashboardRoutes.home}`,

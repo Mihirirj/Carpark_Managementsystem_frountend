@@ -1,6 +1,7 @@
 import TopTitleBar from "../../../TopTitleBar";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import ReactPaginate from "react-paginate";
+import server from "../../../../config/apis/server";
 
 const PER_PAGE = 2;
 
@@ -33,9 +34,30 @@ const parkingSpots = [
 
 export default function FavouriteCarParks() {
     const [currentPage, setCurrentPage] = useState(0);
+    const [parks, setParks] = useState([]);
 
     const offset = currentPage * PER_PAGE;
     const pageCount = Math.ceil(parkingSpots.length / PER_PAGE);
+
+    function getFavParks(){
+        server.get("/owner/get_favorite_parks",
+            {
+                headers:{"token":localStorage.getItem('token')}
+            })
+            .then((res) => {
+                // alert(res.data)
+                setParks(res.data);
+                console.log(res.data)
+            })
+            // Catch errors if any
+            .catch((err) => {
+                alert(err)
+            })
+    }
+
+    useEffect(() => {
+        getFavParks();
+    }, []);
 
     const handlePageClick = ({selected: selectedPage}) => {
         console.log("Selected Page", selectedPage);
@@ -47,26 +69,24 @@ export default function FavouriteCarParks() {
             <TopTitleBar title="Favourite Car Parks"/>
             <div className="p-5 bg-white rounded-xl mx-5">
                 <div className="flex flex-col space-y-4">
-                    {parkingSpots
+                    {parks
                         .slice(offset, offset + PER_PAGE)
-                        .map((spot) => (
-                            <div key={spot.id} className="flex rounded-lg bg-light-gray">
+                        .map((spot, id) => (
+                            <div key={id} className="flex rounded-lg bg-light-gray">
                                 <div className="flex basis-1/4 items-center">
                                     <img
                                         className="object-cover h-44 w-96 rounded-lg"
-                                        src={spot.image}
+                                        src={spot.park.url}
                                         alt={spot.carParkOwnerName}
                                     />
                                 </div>
                                 <div className="flex flex-col basis-3/4 px-6 justify-center gap-y-4">
-                                    <h6 className="text-md font-bold">Car Park Owner: {spot.carParkOwnerName}</h6>
                                     <div className="flex">
                                         <h6 className="text-md text-dark-green font-bold">
-                                            Name of the Parking Spot: {spot.parkName}
+                                            Name of the Parking Spot: Park {spot.park.park_id}
                                         </h6>
                                     </div>
-                                    <h6 className="text-md font-bold">Address: {spot.address}</h6>
-                                    <h6 className="text-md font-bold">Feedbacks: {spot.feedbacks}</h6>
+                                    <h6 className="text-md font-bold">Address: {spot.park.latitude +"," +spot.park.longitude}</h6>
                                 </div>
                             </div>
                         ))}

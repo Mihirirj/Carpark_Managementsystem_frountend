@@ -18,8 +18,7 @@ export default function HomePage() {
                         Find nearest car parking slot within few seconds. we are provide better solution for you.
                     </h3>
                     <div className="flex mt-3 gap-x-3">
-                        <Link to={ROUTES.userSignUp} className="bg-white px-4 py-2 rounded">Sign Up</Link>
-                        <Link to={ROUTES.userSignIn} className="bg-white px-4 py-2 rounded">Sign In</Link>
+                        <Link to='http://localhost:3002/api/auth/sign-in' className="bg-white px-4 py-2 rounded">Sign In</Link>
                     </div>
                 </div>
                 <div className="w-1/2">

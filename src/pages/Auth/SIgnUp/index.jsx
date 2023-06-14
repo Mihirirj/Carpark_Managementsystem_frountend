@@ -1,39 +1,50 @@
 import {ErrorMessage, Field, Form, Formik} from 'formik';
 import * as Yup from 'yup';
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {ROUTES} from "../../../routes/routes";
+import server from "../../../config/apis/server";
 
 const validationSchema = Yup.object({
-    username: Yup.string().required('Required'),
     email: Yup.string().email('Invalid email address').required('Required'),
-    password: Yup.string().required('Required'),
-    confirmPassword: Yup.string()
-        .oneOf([Yup.ref('password'), null], 'Passwords must match')
-        .required('Required'),
-    userType: Yup.string().oneOf(['admin', 'carParkOwner', 'carParkUser']).required('Required')
+    userType: Yup.string().oneOf(['owner', 'user']).required('Required')
 });
 
 const userInputFields = [
-    {id: "username", text: "Username", type: "text"},
     {id: "email", text: "Email", type: "email"},
-    {id: "password", text: "Password", type: "password"},
-    {id: "confirmPassword", text: "Confirm Password", type: "password"},
     {
         id: "userType",
         text: "User Type",
         type: "dropdown",
         options: [
             {value: "", label: "Please select an option", disabled: true},
-            {value: "admin", label: "Admin"},
-            {value: "carParkOwner", label: "Car Park Owner"},
-            {value: "carParkUser", label: "Car Park User"},
+            {value: "owner", label: "Car Park Owner"},
+            {value: "user", label: "Car Park User"},
         ],
     },
 ];
 
 export default function SignUp() {
+    const {email} = useParams();
     const handleSubmit = (values) => {
         console.log(values);
+        async function owner_register() {
+            await server.post("/auth/sign-up",
+                {
+                    email: email,
+                    type: values.userType
+                })
+                .then((res) => {
+                    // alert(res.data)
+                    console.log("result : ", res.data);
+                    localStorage.setItem('token',res.data.token);
+                    localStorage.setItem('user',res.data.type);
+                })
+                // Catch errors if any
+                .catch((err) => {
+                    alert(err)
+                })
+        }
+        owner_register().then(r => console.log("Registered"));
     };
 
     return (
@@ -45,10 +56,7 @@ export default function SignUp() {
                 <hr className="my-5"/>
                 <Formik
                     initialValues={{
-                        username: "",
-                        email: "",
-                        password: "",
-                        confirmPassword: "",
+                        email: email,
                         userType: "carParkUser",
                     }}
                     validationSchema={validationSchema}

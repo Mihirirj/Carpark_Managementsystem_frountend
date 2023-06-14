@@ -12,7 +12,7 @@ export default function Home() {
                 <Link to="/admin-dashboard/home" className="flex justify-center bg-purple-500 p-3 rounded-lg">Admin
                     Dashboard</Link>
                 <Link to="/sign-up" className="flex justify-center bg-purple-500 p-3 rounded-lg">Sign Up</Link>
-                <Link to="/sign-in" className="flex justify-center bg-purple-500 p-3 rounded-lg">Sign In</Link>
+                <a href='http://localhost:3002/api/auth/sign-in'>Login</a>
             </div>
         </div>
     );

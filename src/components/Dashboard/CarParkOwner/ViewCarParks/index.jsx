@@ -38,6 +38,7 @@ const parkingSpots = [
 
 export default function ViewCarParks() {
     const [currentPage, setCurrentPage] = useState(0);
+    const [carParks, setCarParks] = useState([]);
 
     const offset = currentPage * PER_PAGE;
     const pageCount = Math.ceil(parkingSpots.length / PER_PAGE);
@@ -47,57 +48,57 @@ export default function ViewCarParks() {
         setCurrentPage(selectedPage);
     };
 
-    const owner = {
-        userId: 1,
-        username: "akila@gmail.com",
-        password: "1234"
-    }
-
     function getParks() {
-        server.get("/owner/get_all_parks/1" , {})
+        server.get("/owner/get_all_parks",
+            {
+                headers: {"token": localStorage.getItem('token')}
+            }
+        )
             .then((res) => {
-                alert(res.data);
-                console.log("result : ", res.data);
+                setCarParks(res.data);
+                console.log(res.data);
             })
+            // Catch errors if any
             .catch((err) => {
                 alert(err);
             })
     }
 
-    // useEffect(() => {
-    //     getParks();
-    // }, []);
+    useEffect(() => {
+        getParks();
+    }, []);
 
     return (
         <div>
             <TopTitleBar title="My Car parks"/>
             <div className="p-5 bg-white rounded-xl mx-5">
                 <div className="flex flex-col space-y-4">
-                    {parkingSpots
+                    {carParks
                         .slice(offset, offset + PER_PAGE)
-                        .map((spot) => (<div key={spot.id} className="flex rounded-lg bg-light-gray">
+                        .map((spot) => (
+                            <div key={spot.park.park_id} className="flex rounded-lg bg-light-gray">
                                 <div className="flex basis-1/4 items-center">
                                     <img
                                         className="object-cover h-44 w-96 rounded-lg"
-                                        src={spot.image}
-                                        alt={spot.name}
+                                        src={spot.park.url}
+                                        alt={spot.park.url}
                                     />
                                 </div>
                                 <div className="flex flex-col basis-3/4 px-6 justify-center">
                                     <h6 className="text-md font-bold">{spot.name}</h6>
                                     <div className="flex">
-                                    <h6 className="text-md text-dark-green font-bold">
-                                        Open Today:
-                                    </h6>
-                                    <h6 className="ml-2 text-md font-bold">{spot.openToday}</h6>
-                                </div>
-                                <h6 className="text-md font-bold">Available: {spot.available}</h6>
+                                        <h6 className="text-md text-dark-green font-bold">
+                                            Open Today:
+                                        </h6>
+                                        <h6 className="ml-2 text-md font-bold">{spot.openToday || '24 Hours'}</h6>
+                                    </div>
+                                    <h6 className="text-md font-bold">Available: {spot.availability}</h6>
                                     <h6 className="w-fit text-md my-2 font-bold py-1 px-2 bg-dark-green text-white rounded-lg">
-                                        One Hour: {spot.price}
+                                        One Hour: Rs {spot.park.price}
                                     </h6>
                                     <div className="flex flex-row gap-3">
-                                        <h6 className={`w-fit text-md my-1 font-bold py-1 px-3 rounded-lg ${spot.status === ENUMS.parkingStatus.available ? 'bg-dark-green text-white' : 'bg-red-800 text-white'}`}>
-                                            {spot.status}
+                                        <h6 className={`w-fit text-md my-1 font-bold py-1 px-3 rounded-lg ${spot.status === true ? 'bg-dark-green text-white' : 'bg-red-800 text-white'}`}>
+                                            {(spot.status) ? "Parking Available": "Parking Full"}
                                         </h6>
                                     </div>
                                 </div>

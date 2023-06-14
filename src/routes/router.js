@@ -37,13 +37,15 @@ import CarParkUserDashboardContact from "../components/Dashboard/CarParkUser/Car
 import CarParkUserDashboardHelp from "../components/Dashboard/CarParkUser/CarParkUserDashboardHelp";
 import CarParkUserDashboardSetting from "../components/Dashboard/CarParkUser/CarParkUserDashboardSetting";
 import HomePage from "../pages/HomePage";
+import AuthRedirect from "../pages/Auth/AuthRedirect";
+import CarParkUserNewBooking from "../components/Dashboard/CarParkUser/CarParkUserNewBooking";
 
 export default function Router() {
     return (<BrowserRouter>
             <Routes>
                 <Route path={BASE_ROUTES.init} element={<HomePage/>}/>
-                <Route path={BASE_ROUTES.signIn} element={<SignIn/>}/>
-                <Route path={BASE_ROUTES.signUp} element={<SignUp/>}/>
+                <Route path={'home/:token/:type'} element={<AuthRedirect/>}/>
+                <Route path={'sign/:email'} element={<SignUp/>}/>
                 <Route path={BASE_ROUTES.logout} element={<Home/>}/>
                 <Route path={BASE_ROUTES.carParkOwnerDashboard} element={<CarParkOwnerDashboard/>}>
                     <Route path={BASE_ROUTES.home} element={<CarParkOwnerDashboardHome/>}/>
@@ -65,6 +67,7 @@ export default function Router() {
                 <Route path={BASE_ROUTES.carParkUserDashboard} element={<CarParkUserDashboard/>}>
                     <Route path={BASE_ROUTES.home} element={<CarParkUserDashboardHome/>}/>
                     <Route path={BASE_ROUTES.booking} element={<CarParkUserBooking/>}/>
+                    <Route path={`${BASE_ROUTES.newBooking}/:id`} element={<CarParkUserNewBooking/>}/>
                     <Route path={BASE_ROUTES.payment} element={<CarParkUserPayment/>}/>
                     <Route path={BASE_ROUTES.contact} element={<CarParkUserDashboardContact/>}/>
                     <Route path={BASE_ROUTES.help} element={<CarParkUserDashboardHelp/>}/>

@@ -2,8 +2,11 @@ import ENUMS from "../../../../config/enums/enums";
 import {TbArrowBarLeft, TbArrowBarRight} from "react-icons/tb";
 import {FiSearch} from "react-icons/fi";
 import {FaSort} from "react-icons/fa";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import RatingsBar from "../../../RatingsBar";
+import server from "../../../../config/apis/server";
+import {Link} from "react-router-dom";
+import {ROUTES} from "../../../../routes/routes";
 
 const parkingSpots = [
     {
@@ -75,6 +78,27 @@ const parkingSpots = [
 ];
 export default function CarParkUserMap() {
     const [selectedSpot, setSelectedSpot] = useState(null);
+    const [parks, setParks] = useState([]);
+
+    function getParks() {
+        server.get("/user/get_all_parks",
+            {
+                headers: {"token": localStorage.getItem('token')}
+            }
+        )
+            .then((res) => {
+                setParks(res.data);
+                console.log(res.data);
+            })
+            // Catch errors if any
+            .catch((err) => {
+                alert(err);
+            })
+    }
+
+    useEffect(() => {
+        getParks();
+    }, []);
 
     return (
         <div className="mt-28 bg-white mx-10 p-4 rounded-lg">
@@ -111,33 +135,33 @@ export default function CarParkUserMap() {
                     </div>
                     <div className="h-[26rem] overflow-y-scroll">
                         <div className="flex flex-col space-y-3">
-                            {parkingSpots
+                            {parks.length > 0 && parks
                                 .map((spot) => (
-                                    <div key={spot.id}
+                                    <div key={spot.park.park_id}
                                          className="flex rounded-lg bg-light-gray"
-                                         onClick={() => setSelectedSpot(spot)}>
+                                         onClick={() => setSelectedSpot(spot.park)}>
                                         <div className="flex basis-1/3 items-center">
                                             <img
-                                                className="object-cover h-36 w-96 rounded-lg"
-                                                src={spot.image}
+                                                className="object-cover h-36 w-36 rounded-lg"
+                                                src={spot.park.url}
                                                 alt={spot.name}
                                             />
                                         </div>
                                         <div className="flex flex-col basis-2/3 px-6 justify-center">
-                                            <h6 className="text-md font-bold">{spot.name}</h6>
+                                            <h6 className="text-md font-bold">{"Park" + spot.park.park_id}</h6>
                                             <div className="flex">
                                                 <h6 className="text-md text-dark-green font-bold">
                                                     Open Today:
                                                 </h6>
                                                 <h6 className="ml-2 text-md font-bold">{spot.openToday}</h6>
                                             </div>
-                                            <h6 className="text-md font-bold">Available: {spot.available}</h6>
+                                            <h6 className="text-md font-bold">Available: {spot.availability}</h6>
                                             <h6 className="w-fit text-md font-bold py-1 px-2 bg-dark-green text-white rounded-lg">
-                                                One Hour: {spot.price}
+                                                One Hour: {spot.park.price}
                                             </h6>
                                             <div className="flex flex-row gap-3">
                                                 <h6 className={`w-fit text-md my-1 font-bold py-1 px-3 rounded-lg ${spot.status === ENUMS.parkingStatus.available ? 'bg-dark-green text-white' : 'bg-red-800 text-white'}`}>
-                                                    {spot.status}
+                                                    {(spot.status) ? "Parking Full": "Parking Available"}
                                                 </h6>
                                             </div>
                                         </div>
@@ -151,16 +175,16 @@ export default function CarParkUserMap() {
                         <h1 className="font-bold text-xl">
                             {selectedSpot.name}
                         </h1>
-                        <RatingsBar rating={selectedSpot.rating}/>
+                        {/*<RatingsBar rating={selectedSpot.rating}/>*/}
                         <div className="h-5/6">
                             <div className="font-bold">
                                 Description:
                             </div>
-                            {selectedSpot.description}
+                            {selectedSpot.facilities}
                         </div>
-                        <div className="flex bg-dark-green py-2 rounded-lg justify-center font-bold text-white">
+                        <Link to={`${ROUTES.carParkUserDashboardNewBooking}/${selectedSpot.park_id}`} className="flex bg-dark-green py-2 rounded-lg justify-center font-bold text-white">
                             Book for Rs. {selectedSpot.price}
-                        </div>
+                        </Link>
                     </div>
                 ) : (
                     <div className="flex border rounded-lg items-center justify-center">
