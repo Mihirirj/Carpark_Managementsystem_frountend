@@ -7,9 +7,9 @@ const formFields = [
     {id: 2, label: "Latitude", type: "text", name: "latitude",},
     {id: 3, label: "Longitude", type: "text", name: "longitude",},
     {id: 5, label: "Image url", type: "text", name: "parkingLotImage",},
-    {id: 7, label: "Number of Spots", type: "text", name: "numSpots",},
+    {id: 7, label: "Number of Spots", type: "number", name: "numSpots",},
     {id: 8, label: "Spot Size", type: "text", name: "spotSize",},
-    {id: 11, label: "Price", type: "text", name: "price",},
+    {id: 11, label: "Price", type: "number", name: "price",},
     {id: 12, label: "Facilities", type: "text", name: "facilities",},
     {id: 13, label: "Special notes", type: "text", name: "specialNotes",},
 ];
@@ -27,7 +27,7 @@ const initialValues = {
 
 const validationSchema = Yup.object().shape({
     numSpots: Yup.number().typeError('Number of spots must be a number').required('Number of spots is required'),
-    price: Yup.string().required('Prices information is required'),
+    price: Yup.number().typeError('Price must be a number').required('Price is required'),
     facilities: Yup.string().required('Facilities information is required'),
     specialNotes: Yup.string()
 });

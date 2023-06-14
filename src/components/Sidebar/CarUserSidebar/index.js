@@ -44,7 +44,7 @@ const navLinks = [
     },
     {
         id: 7,
-        to: ROUTES.logout,
+        to: 'https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:3000',
         icon: <AiOutlineLogout size={25}/>,
         label: "Logout"
     }

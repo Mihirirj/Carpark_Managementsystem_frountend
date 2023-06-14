@@ -1,6 +1,6 @@
 import {ErrorMessage, Field, Form, Formik} from 'formik';
 import * as Yup from 'yup';
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {ROUTES} from "../../../routes/routes";
 import server from "../../../config/apis/server";
 
@@ -25,8 +25,10 @@ const userInputFields = [
 
 export default function SignUp() {
     const {email} = useParams();
+    const navigate = useNavigate();
     const handleSubmit = (values) => {
         console.log(values);
+
         async function owner_register() {
             await server.post("/auth/sign-up",
                 {
@@ -36,8 +38,17 @@ export default function SignUp() {
                 .then((res) => {
                     // alert(res.data)
                     console.log("result : ", res.data);
-                    localStorage.setItem('token',res.data.token);
-                    localStorage.setItem('user',res.data.type);
+                    localStorage.setItem('token', res.data.token);
+                    localStorage.setItem('user', res.data.type);
+                    const type = localStorage.getItem('user');
+
+                    if (type === "owner") {
+                        navigate(ROUTES.carParkOwnerDashboardDashboard);
+                    } else if (type === "user") {
+                        navigate(ROUTES.carParkUserDashboard);
+                    } else if (type === "admin") {
+                        navigate(ROUTES.adminDashboard);
+                    }
                 })
                 // Catch errors if any
                 .catch((err) => {
