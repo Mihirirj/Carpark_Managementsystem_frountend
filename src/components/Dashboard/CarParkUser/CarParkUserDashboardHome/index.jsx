@@ -132,7 +132,12 @@ export default function CarParkUserDashboardHome() {
                         </div>
                     </div>
                 </div>
-                <div className="grid grid-cols-3 gap-x-10 gap-y-4 mt-10">
+                <div className="flex items-center justify-center">
+                    <Link to={ROUTES.carParkUserDashboardMap} className="bg-amber-200 rounded text-center w-1/5">
+                        Filter
+                    </Link>
+                </div>
+                <div className="grid grid-cols-3 gap-x-10 gap-y-4 mt-2">
                     {menuItems.map(({id, label, icon, link}) => (
                         <Link to={link} key={id}
                               className="flex items-center justify-center bg-light-gray py-8 rounded-lg">

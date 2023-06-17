@@ -13,9 +13,9 @@ export default function AuthRedirect() {
         if (type === "owner") {
             navigate(ROUTES.carParkOwnerDashboardDashboard);
         } else if (type === "user") {
-            navigate(ROUTES.carParkUserDashboard);
+            navigate(ROUTES.carParkUserDashboardHome);
         } else if (type === "admin") {
-            navigate(ROUTES.adminDashboard);
+            navigate(ROUTES.adminDashboardDashboard);
         }
     }, []);
 

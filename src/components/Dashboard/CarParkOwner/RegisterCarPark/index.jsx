@@ -4,14 +4,18 @@ import {ErrorMessage, Field, Form, Formik} from "formik";
 import server from "../../../../config/apis/server";
 
 const formFields = [
+    {id: 1, label: "Address", type: "text", name: "address",},
     {id: 2, label: "Latitude", type: "text", name: "latitude",},
     {id: 3, label: "Longitude", type: "text", name: "longitude",},
+    {id: 4, label: "Name of the Park", type: "text", name: "name",},
     {id: 5, label: "Image url", type: "text", name: "parkingLotImage",},
     {id: 7, label: "Number of Spots", type: "number", name: "numSpots",},
     {id: 8, label: "Spot Size", type: "text", name: "spotSize",},
     {id: 11, label: "Price", type: "number", name: "price",},
     {id: 12, label: "Facilities", type: "text", name: "facilities",},
     {id: 13, label: "Special notes", type: "text", name: "specialNotes",},
+    {id: 14, label: "Registration Certificate No", type: "text", name: "certificateNo",},
+
 ];
 
 const initialValues = {

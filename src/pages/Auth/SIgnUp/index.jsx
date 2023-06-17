@@ -6,7 +6,7 @@ import server from "../../../config/apis/server";
 
 const validationSchema = Yup.object({
     email: Yup.string().email('Invalid email address').required('Required'),
-    userType: Yup.string().oneOf(['owner', 'user']).required('Required')
+    userType: Yup.string().oneOf(['owner', 'user', 'admin']).required('Required')
 });
 
 const userInputFields = [
@@ -19,6 +19,7 @@ const userInputFields = [
             {value: "", label: "Please select an option", disabled: true},
             {value: "owner", label: "Car Park Owner"},
             {value: "user", label: "Car Park User"},
+            {value: "admin", label: "Admin"},
         ],
     },
 ];

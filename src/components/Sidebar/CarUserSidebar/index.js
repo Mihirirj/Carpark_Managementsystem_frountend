@@ -28,7 +28,7 @@ const navLinks = [
         id: 4,
         to: ROUTES.carParkUserDashboardContact,
         icon: <MdWifiCalling size={25}/>,
-        label: "Contact"
+        label: "QR Scan"
     },
     {
         id: 5,

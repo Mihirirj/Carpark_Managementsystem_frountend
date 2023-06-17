@@ -3,82 +3,28 @@ import {TbArrowBarLeft, TbArrowBarRight} from "react-icons/tb";
 import {FiSearch} from "react-icons/fi";
 import {FaSort} from "react-icons/fa";
 import {useEffect, useState} from "react";
-import RatingsBar from "../../../RatingsBar";
 import server from "../../../../config/apis/server";
 import {Link} from "react-router-dom";
 import {ROUTES} from "../../../../routes/routes";
+import GoogleMapReact from 'google-map-react';
 
-const parkingSpots = [
-    {
-        id: 1,
-        image: "https://d1gymyavdvyjgt.cloudfront.net/drive/images/uploads/headers/ws_cropper/1_0x0_790x520_0x520_bay_parking_guide.jpg",
-        name: "Parking Spot 1",
-        openToday: "24 Hours",
-        available: 5,
-        price: "LKR500",
-        status: "Parking Full",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum, mauris eget ultrices aliquam, nisl magna fermentum nisi, eu rhoncus risus felis eget arcu. Sed sed tortor libero. In in orci non risus fringilla vestibulum.",
-        rating: 4,
-    },
-    {
-        id: 2,
-        image: "http://www.selby.gov.uk/sites/default/files/leisure%20centre%203_0.jpg",
-        name: "Parking Spot 2",
-        openToday: "12 Hours",
-        available: 4,
-        price: "LKR800",
-        status: "Parking Available",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Fusce sit amet libero eget odio finibus luctus. Etiam faucibus nisi quis laoreet consectetur. Praesent rutrum accumsan turpis, vel sagittis nulla finibus in.",
-        rating: 3,
-    },
-    {
-        id: 3,
-        image: "https://www.carlisle.gov.uk/Portals/0/EasyGalleryImages/7/2090/via2.jpg",
-        name: "Parking Spot 3",
-        openToday: "15 Hours",
-        available: 10,
-        price: "LKR700",
-        status: "Parking Full",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in nisl eget sem fringilla auctor. Integer ullamcorper mauris mauris, a venenatis neque accumsan vitae. In convallis dolor in turpis molestie vulputate.",
-        rating: 2,
-    },
-    {
-        id: 4,
-        image: "https://www.carlisle.gov.uk/Portals/0/EasyGalleryImages/7/2090/via2.jpg",
-        name: "Parking Spot 4",
-        openToday: "15 Hours",
-        available: 10,
-        price: "LKR700",
-        status: "Parking Full",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel suscipit nulla. Duis vitae arcu sed arcu efficitur tempus ut sed libero. Maecenas eget eleifend turpis. Ut ornare quam nec purus tristique vehicula.",
-        rating: 5,
-    },
-    {
-        id: 5,
-        image: "https://www.carlisle.gov.uk/Portals/0/EasyGalleryImages/7/2090/via2.jpg",
-        name: "Parking Spot 5",
-        openToday: "15 Hours",
-        available: 5,
-        price: "LKR1100",
-        status: "Parking Full",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel suscipit nulla. Duis vitae arcu sed arcu efficitur tempus ut sed libero. Maecenas eget eleifend turpis. Ut ornare quam nec purus tristique vehicula.",
-        rating: 5,
-    },
-    {
-        id: 6,
-        image: "https://www.carlisle.gov.uk/Portals/0/EasyGalleryImages/7/2090/via2.jpg",
-        name: "Parking Spot 6",
-        openToday: "15 Hours",
-        available: 9,
-        price: "LKR700",
-        status: "Parking Full",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel suscipit nulla. Duis vitae arcu sed arcu efficitur tempus ut sed libero. Maecenas eget eleifend turpis. Ut ornare quam nec purus tristique vehicula.",
-        rating: 2,
-    },
-];
+const Marker = () => {
+    return <div className="SuperAwesomePin">Park1</div>
+};
+
 export default function CarParkUserMap() {
     const [selectedSpot, setSelectedSpot] = useState(null);
     const [parks, setParks] = useState([]);
+    const [filteredParks, setFilteredParks] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const defaultProps = {
+        center: {
+            lat: 6.9271,
+            lng: 79.8612
+        },
+        zoom: 11
+    };
 
     function getParks() {
         server.get("/user/get_all_parks",
@@ -88,6 +34,7 @@ export default function CarParkUserMap() {
         )
             .then((res) => {
                 setParks(res.data);
+                filterParks(res.data, searchQuery);
                 console.log(res.data);
             })
             // Catch errors if any
@@ -96,8 +43,19 @@ export default function CarParkUserMap() {
             })
     }
 
+    function filterParks(parksData, query) {
+        let filtered = parksData;
+        if (query) {
+            filtered = parksData.filter((park) =>
+                park.name && park.name.toLowerCase().includes(query.toLowerCase())
+            );
+        }
+        setFilteredParks(filtered);
+    }
+
     useEffect(() => {
         getParks();
+        filterParks(parks, searchQuery);
     }, []);
 
     return (
@@ -105,8 +63,13 @@ export default function CarParkUserMap() {
             <div className="grid grid-cols-4 gap-x-3 bg-light-gray items-center py-3 px-3 rounded-lg"
                  onClick={() => setSelectedSpot(null)}>
                 <div className="grid grid-cols-7 items-center bg-white rounded">
-                    <input type="text" placeholder="Where  Do You Want to park"
-                           className="pl-2 py-2 col-span-6 rounded-lg"/>
+                    <input
+                        type="text"
+                        placeholder="Where Do You Want to park"
+                        className="pl-2 py-2 col-span-6 rounded-lg"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
                     <FiSearch className="cursor-pointer mx-auto" size={25}/>
                 </div>
                 <div className="flex justify-center">
@@ -127,7 +90,7 @@ export default function CarParkUserMap() {
                     <div className="flex justify-between bg-light-gray rounded-lg py-2 px-2 mb-3"
                          onClick={() => setSelectedSpot(null)}>
                         <div>
-                            25 Records found
+                            {filteredParks.length > 0 && parks.length} Car Parks Available
                         </div>
                         <div>
                             <FaSort size={25}/>
@@ -135,7 +98,7 @@ export default function CarParkUserMap() {
                     </div>
                     <div className="h-[26rem] overflow-y-scroll">
                         <div className="flex flex-col space-y-3">
-                            {parks.length > 0 && parks
+                            {filteredParks.length > 0 && filteredParks
                                 .map((spot) => (
                                     <div key={spot.park.park_id}
                                          className="flex rounded-lg bg-light-gray"
@@ -188,7 +151,13 @@ export default function CarParkUserMap() {
                     </div>
                 ) : (
                     <div className="flex border rounded-lg items-center justify-center">
-                        Google Map
+                        <GoogleMapReact
+                            bootstrapURLKeys={{ key: "AIzaSyCpoYLn6IllWuJeNCl77tmfCkSWL2dNLZo" }}
+                            defaultCenter={defaultProps.center}
+                            defaultZoom={defaultProps.zoom}
+                        >
+                            <Marker lat={6.92} lng={79.8} />
+                        </GoogleMapReact>
                     </div>
                 )}
             </div>

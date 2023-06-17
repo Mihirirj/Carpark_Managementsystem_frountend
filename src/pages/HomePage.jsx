@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
 import {ROUTES} from "../routes/routes";
+import {FcGoogle} from "react-icons/fc";
 
 export default function HomePage() {
     return (
@@ -18,7 +19,8 @@ export default function HomePage() {
                         Find nearest car parking slot within few seconds. we are provide better solution for you.
                     </h3>
                     <div className="flex mt-3 gap-x-3">
-                        <Link to='http://localhost:3002/api/auth/sign-in' className="bg-white px-4 py-2 rounded">Sign In</Link>
+                        <Link to='http://localhost:3002/api/auth/sign-in'
+                              className="bg-white px-4 py-2 rounded flex"><FcGoogle size={25}/> <span className="ml-2">Continue with Google</span></Link>
                     </div>
                 </div>
                 <div className="w-1/2">

@@ -3,6 +3,10 @@ import {NavLink} from "react-router-dom";
 import {AiFillDashboard, AiFillEye, AiFillHome, AiFillSetting, AiOutlineLogout} from 'react-icons/ai';
 import {ROUTES} from "../../../routes/routes";
 
+const PATH = {
+    logoutURL:  'https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:3000' // Replace with your actual logout URL
+};
+
 const navLinks = [
     {
         id: 1,
@@ -30,7 +34,7 @@ const navLinks = [
     },
     {
         id: 5,
-        to: 'https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:3000',
+        to: PATH.logoutURL,
         icon: <AiOutlineLogout size={25}/>,
         label: "Logout"
     }

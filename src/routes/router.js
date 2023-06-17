@@ -69,9 +69,10 @@ export default function Router() {
                     <Route path={BASE_ROUTES.booking} element={<CarParkUserBooking/>}/>
                     <Route path={`${BASE_ROUTES.newBooking}/:id`} element={<CarParkUserNewBooking/>}/>
                     <Route path={BASE_ROUTES.payment} element={<CarParkUserPayment/>}/>
-                    <Route path={BASE_ROUTES.contact} element={<CarParkUserDashboardContact/>}/>
+                    <Route path={BASE_ROUTES.contact} element={<ScanQRCode/>}/>
                     <Route path={BASE_ROUTES.help} element={<CarParkUserDashboardHelp/>}/>
                     <Route path={BASE_ROUTES.setting} element={<CarParkUserDashboardSetting/>}/>
+
                 </Route>
                 <Route path={BASE_ROUTES.carParkUserDashboard} element={<CarParkUserDashboardWithNavbar/>}>
                     <Route path={BASE_ROUTES.map} element={<CarParkUserMap/>}/>
