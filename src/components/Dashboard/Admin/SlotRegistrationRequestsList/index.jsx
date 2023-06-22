@@ -1,8 +1,9 @@
 import TopTitleBar from "../../../TopTitleBar";
 import ReactPaginate from "react-paginate";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {ROUTES} from "../../../../routes/routes";
+import server from "../../../../config/apis/server";
 
 const PER_PAGE = 6;
 
@@ -32,7 +33,7 @@ const owners = [
 
 export default function SlotRegistrationRequestsList() {
     const [currentPage, setCurrentPage] = useState(0);
-    const [ownersList,] = useState(owners);
+    const [ownersList, setOwnersList] = useState([]);
     const [, setSelectedOwner] = useState(null);
     const [pageCount,] = useState(Math.ceil(owners.length / PER_PAGE));
 
@@ -43,6 +44,21 @@ export default function SlotRegistrationRequestsList() {
         setCurrentPage(selectedPage);
     };
 
+    const getCarParks = () => {
+        server.get("/admin/get_all_parks",{
+            headers: {"token": localStorage.getItem('token')}
+        }).then((res) => {
+            console.log(res.data);
+            setOwnersList(res.data);
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+    useEffect(() => {
+        getCarParks();
+    }, []);
+
     return (
         <div>
             <TopTitleBar title="Parking Owners List"/>
@@ -52,7 +68,7 @@ export default function SlotRegistrationRequestsList() {
                         Name
                     </div>
                     <div className="pl-10">
-                        Requests Count
+                        Slot Count
                     </div>
                     <div className="pr-10">
                         Action
@@ -61,15 +77,15 @@ export default function SlotRegistrationRequestsList() {
                 {ownersList
                     .slice(offset, offset + PER_PAGE)
                     .map(owner => (
-                        <div key={owner.id} className="flex items-center rounded-lg py-2 mt-2 border">
+                        <div key={owner.park.park_id} className="flex items-center rounded-lg py-2 mt-2 border">
                             <div className="pl-10 basis-1/3">
-                                {owner.name}
+                                {owner.park.name}
                             </div>
                             <div className="pl-10 basis-1/3 flex justify-center">
-                                {owner.requestsCount}
+                                {owner.park.spot_size}
                             </div>
                             <div className="flex justify-end pr-10 gap-x-10 basis-1/3">
-                                <Link to={ROUTES.adminDashboardViewCarParkRegistration + `/${owner.id}`}
+                                <Link to={ROUTES.adminDashboardViewCarParkRegistration + `/${owner.park.park_id}`}
                                       className="bg-green-600 rounded px-3 py-1 text-white cursor-pointer"
                                       onClick={() => setSelectedOwner(owner)}>
                                     View

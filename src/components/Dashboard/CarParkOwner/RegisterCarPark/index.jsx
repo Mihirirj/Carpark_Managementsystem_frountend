@@ -19,6 +19,9 @@ const formFields = [
 ];
 
 const initialValues = {
+    address: '',
+    name: '',
+    certificateNo: '',
     parkingLotImage: '',
     latitude: '',
     longitude: '',
@@ -33,7 +36,7 @@ const validationSchema = Yup.object().shape({
     numSpots: Yup.number().typeError('Number of spots must be a number').required('Number of spots is required'),
     price: Yup.number().typeError('Price must be a number').required('Price is required'),
     facilities: Yup.string().required('Facilities information is required'),
-    specialNotes: Yup.string()
+    specialNotes: Yup.string(),
 });
 
 export default function RegisterCarPark() {
@@ -42,6 +45,7 @@ export default function RegisterCarPark() {
 
         function addPark() {
             server.post("/owner/add_park", {
+                    name: values.name,
                     longitude: values.latitude,
                     latitude: values.longitude,
                     url: values.parkingLotImage,

@@ -1,94 +1,127 @@
 import TopTitleBar from "../../../TopTitleBar";
-import * as Yup from 'yup';
 import {ErrorMessage, Field, Form, Formik} from "formik";
-import {useParams} from "react-router-dom";
+import {useNavigate, useNavigation, useParams} from "react-router-dom";
+import server from "../../../../config/apis/server";
+import {useEffect, useState} from "react";
+import {ROUTES} from "../../../../routes/routes";
 
 const formFields = [
-    {id: 1, label: "Owner Name", type: "text", name: "ownerName",},
-    {id: 2, label: "Owner ID", type: "text", name: "ownerID",},
-    {id: 3, label: "Parking Lot Address", type: "text", name: "address",},
-    {id: 4, label: "Name of Parking Lot", type: "text", name: "parkingLotName",},
-    {id: 5, label: "Image of Parking Lot", type: "file", name: "parkingLotImage",},
-    {id: 6, label: "Outline Plan", type: "text", name: "outlinePlan",},
-    {id: 7, label: "Number of Spots", type: "text", name: "numSpots",},
-    {id: 8, label: "Size of Spots", type: "text", name: "spotSize",},
-    {id: 9, label: "Registration Certificate of Parking Lot", type: "text", name: "registrationCertificate",},
-    {id: 10, label: "Things around the parking lot", type: "text", name: "surroundings",},
-    {id: 11, label: "Prices", type: "text", name: "prices",},
-    {id: 12, label: "Facilities", type: "text", name: "facilities",},
-    {id: 13, label: "Special notes", type: "text", name: "specialNotes",},
+    {id: 1, label: "Address", type: "text", name: "address"},
+    {id: 2, label: "Latitude", type: "text", name: "latitude"},
+    {id: 3, label: "Longitude", type: "text", name: "longitude"},
+    {id: 4, label: "Name of the Park", type: "text", name: "name"},
+    {id: 5, label: "Image URL", type: "text", name: "parkingLotImage"},
+    {id: 7, label: "Number of Spots", type: "number", name: "numSpots"},
+    {id: 8, label: "Spot Size", type: "text", name: "spotSize"},
+    {id: 11, label: "Price", type: "number", name: "price"},
+    {id: 12, label: "Facilities", type: "text", name: "facilities"},
+    {id: 13, label: "Special notes", type: "text", name: "specialNotes"},
+    {id: 14, label: "Registration Certificate No", type: "text", name: "certificateNo"}
 ];
-
-const owners = [
-    {id: 1, name: 'Sathsara Bandara', requestsCount: 1},
-    {id: 2, name: 'Kushani Fonseka', requestsCount: 2},
-    {id: 3, name: 'Sithumi Balasuriya', requestsCount: 3},
-    {id: 4, name: 'Menuka Rathnayake', requestsCount: 1},
-    {id: 5, name: 'Anura Silva', requestsCount: 4},
-    {id: 6, name: 'Chaminda Senarath', requestsCount: 4},
-    {id: 7, name: 'Amila Perera', requestsCount: 5},
-    {id: 8, name: 'Maheshi Ranaweera', requestsCount: 1},
-    {id: 9, name: 'Tharindu Gunawardena', requestsCount: 2},
-    {id: 10, name: 'Saman Kumara', requestsCount: 4},
-    {id: 11, name: 'Nayani Abeysinghe', requestsCount: 8},
-    {id: 12, name: 'Nuwan Jayawardena', requestsCount: 10},
-    {id: 13, name: 'Ranil Peiris', requestsCount: 5},
-    {id: 14, name: 'Dilani Fernando', requestsCount: 1},
-    {id: 15, name: 'Dilshan Perera', requestsCount: 1},
-    {id: 16, name: 'Roshan Silva', requestsCount: 3},
-    {id: 17, name: 'Thilini Samarasinghe', requestsCount: 2},
-    {id: 18, name: 'Nimali Wijesinghe', requestsCount: 6},
-    {id: 19, name: 'Sanjaya Rathnayake', requestsCount: 7},
-    {id: 20, name: 'Rukmal Perera', requestsCount: 3}
-];
-
-const initialValues = owners.map(owner => ({
-    ownerName: owner.name,
-    ownerID: `ID${owner.id}`,
-    address: `${owner.name.split(' ')[0]}'s Parking Lot, ${owner.id} Main St.`,
-    parkingLotName: `${owner.name.split(' ')[0]}'s Parking Lot`,
-    parkingLotImage: '',
-    outlinePlan: `https://example.com/${owner.name.toLowerCase().replace(' ', '_')}/outline_plan.pdf`,
-    numSpots: owner.requestsCount * 10,
-    spotSize: 'Compact',
-    registrationCertificate: `https://example.com/${owner.name.toLowerCase().replace(' ', '_')}/registration_certificate.pdf`,
-    surroundings: 'Near a shopping mall',
-    prices: `Hourly: Rs. ${owner.requestsCount * 100}, Daily: Rs. ${owner.requestsCount * 200}`,
-    facilities: 'Restroom, CCTV cameras, EV charging stations',
-    specialNotes: 'No overnight parking allowed'
-}));
-
-
-const validationSchema = Yup.object().shape({
-    ownerName: Yup.string().required('Owner name is required'),
-    ownerID: Yup.string().required('Owner ID is required'),
-    address: Yup.string().required('Parking lot address is required'),
-    parkingLotName: Yup.string().required('Parking lot name is required'),
-    outlinePlan: Yup.string().required('Outline plan is required'),
-    numSpots: Yup.number().typeError('Number of spots must be a number').required('Number of spots is required'),
-    spotSize: Yup.number().typeError('Size of spots must be a number').required('Size of spots is required'),
-    registrationCertificate: Yup.string().required('Registration certificate is required'),
-    surroundings: Yup.string().required('Surroundings description is required'),
-    prices: Yup.string().required('Prices information is required'),
-    facilities: Yup.string().required('Facilities information is required'),
-    specialNotes: Yup.string()
-});
 
 export default function ViewCarParkRegistration() {
     const {id} = useParams();
+    const [ownersList, setOwnersList] = useState([]);
+    const [selectedPark, setSelectedPark] = useState(null);
+    const [initialValues, setInitialValues] = useState(null);
+    const navigate= useNavigate();
+
     const handleSubmit = (values, {setSubmitting, resetForm}) => {
         alert(JSON.stringify(values, null, 2));
         setSubmitting(false);
         resetForm();
+
+        server
+            .put("admin/confirm_park/" + id,)
+            .then((res) => {
+                console.log(res);
+                if(res.status === 200){
+                    alert("Park successfully confirmed");
+                    navigate(ROUTES.adminDashboardHome);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
+
+    const filterParkById = (id) => {
+        if (ownersList.length > 0) {
+            const filteredPark = ownersList.find((park) => park.park.park_id == id.toString());
+            console.log(filteredPark);
+            setSelectedPark(filteredPark);
+        }
+    };
+
+    const handleReject = () => {
+        server
+            .put("admin/reject_park/" + id,)
+            .then((res) => {
+                console.log(res);
+                if(res.status === 200){
+                    alert("Park successfully rejected");
+                    navigate(ROUTES.adminDashboardHome);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+    const getCarParks = () => {
+        server
+            .get("/admin/get_all_parks", {
+                headers: {"token": localStorage.getItem("token")}
+            })
+            .then((res) => {
+                console.log(res.data);
+                setOwnersList(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
+    useEffect(() => {
+        getCarParks();
+    }, []);
+
+    useEffect(() => {
+        filterParkById(id);
+    }, [id, ownersList]);
+
+    useEffect(() => {
+        if (selectedPark && Object.keys(selectedPark).length > 0 && selectedPark.park) {
+            const updatedInitialValues = {
+                address: selectedPark.park.address || "",
+                name: selectedPark.park.name || "Name Akila",
+                certificateNo: selectedPark.park.certificateNo || "",
+                parkingLotImage: selectedPark.park
+                    .parkingLotImage || "",
+                latitude: selectedPark.park.latitude || "",
+                longitude: selectedPark.park.longitude || "",
+                numSpots: selectedPark.park.numSpots || "",
+                spotSize: selectedPark.park.spotSize || "",
+                price: selectedPark.park.price || "",
+                facilities: selectedPark.park.facilities || "",
+                specialNotes: selectedPark.park.specialNotes || ""
+            };
+
+            setInitialValues(updatedInitialValues);
+        }
+    }, [selectedPark]);
+
+    if (!initialValues) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div>
-            <TopTitleBar title={`Registration Requests - ${initialValues.ownerName}`}/>
+            <TopTitleBar title={'Request'}/>
             <div className="bg-white rounded-xl mx-5 px-8 py-4">
                 <Formik
-                    initialValues={initialValues[id]}
-                    validationSchema={validationSchema}
+                    initialValues={initialValues}
+                    enableReinitialize={true}
                     onSubmit={handleSubmit}
                 >
                     {({isSubmitting}) => (
@@ -114,13 +147,10 @@ export default function ViewCarParkRegistration() {
                                             className="basis-1/3 bg-green-500 px-4 py-2 rounded-lg">
                                         Approve
                                     </button>
-                                    <button type="submit" title="Submit" disabled={isSubmitting}
+                                    <button type="button" title="Submit" disabled={isSubmitting}
+                                            onClick={() => handleReject()}
                                             className="basis-1/3 bg-orange-400 px-4 py-2 rounded-lg">
                                         Reject
-                                    </button>
-                                    <button type="submit" title="Submit" disabled={isSubmitting}
-                                            className="basis-1/3 bg-red-700 px-4 py-2 rounded-lg">
-                                        Delete
                                     </button>
                                 </div>
                             </div>

@@ -6,6 +6,8 @@ import {BsChatRightText} from "react-icons/bs";
 import {VscFeedback} from "react-icons/vsc";
 import {ROUTES} from "../../../../routes/routes";
 import {Link} from "react-router-dom";
+import {useEffect, useState} from "react";
+import server from "../../../../config/apis/server";
 
 
 const linksData = [
@@ -57,6 +59,33 @@ const linksData = [
 ];
 
 export default function AdminDashboardDashboard() {
+    const [dashboardData, setDashboardData] = useState({});
+
+    useEffect(() => {
+        fetchDashboardData();
+
+        if(setDashboardData.length > 0){
+            linksData[0].number = dashboardData.park_count;
+            linksData[1].number = dashboardData.park_owner_count;
+            linksData[2].number = dashboardData.vehicle_owner_count;
+            linksData[3].number = dashboardData.feedback_count;
+            linksData[4].number = dashboardData.request_count;
+        }
+
+    }, []);
+
+    const fetchDashboardData = () => {
+        server
+            .get("/admin/get_analyse")
+            .then((res) => {
+                setDashboardData(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
+
     return (
         <div>
             <TopTitleBar title="My Dashboard"/>

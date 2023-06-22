@@ -18,14 +18,7 @@ const initialValues = {
 export default function CarParkUserNewBooking() {
     const {id} = useParams();
     const [userInputFields, setUserInputFields] = useState([
-        {
-            id: "slotId",
-            text: "Select the Slot",
-            type: "dropdown",
-            options: [
-                {value: "", label: "Please select an option", disabled: true},
-            ],
-        },
+        {id: "slotId", text: "Select the Slot", type: "dropdown", options: [{value: "", label: "Please select an option", disabled: true},],},
         {id: "startDateOfBooked", text: "Start Date of Booked", type: "date"},
         {id: "startTimeOfBooked", text: "Start Time of Booked", type: "time"},
         {id: "endDateOfBooked", text: "End Date of Booked", type: "date"},
@@ -97,6 +90,7 @@ export default function CarParkUserNewBooking() {
         }
 
         addReservation();
+
         resetForm();
     };
 

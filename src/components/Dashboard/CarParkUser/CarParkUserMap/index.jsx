@@ -2,14 +2,20 @@ import ENUMS from "../../../../config/enums/enums";
 import {TbArrowBarLeft, TbArrowBarRight} from "react-icons/tb";
 import {FiSearch} from "react-icons/fi";
 import {FaSort} from "react-icons/fa";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import server from "../../../../config/apis/server";
 import {Link} from "react-router-dom";
 import {ROUTES} from "../../../../routes/routes";
-import GoogleMapReact from 'google-map-react';
+import {GoogleMap, Marker, useJsApiLoader} from "@react-google-maps/api";
 
-const Marker = () => {
-    return <div className="SuperAwesomePin">Park1</div>
+const containerStyle = {
+    width: '100%',
+    height: '100%'
+};
+
+const center = {
+    lat: 6.9271,
+    lng: 79.8612
 };
 
 export default function CarParkUserMap() {
@@ -17,14 +23,27 @@ export default function CarParkUserMap() {
     const [parks, setParks] = useState([]);
     const [filteredParks, setFilteredParks] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+    const [mapList, setMapList] = useState([]);
 
-    const defaultProps = {
-        center: {
-            lat: 6.9271,
-            lng: 79.8612
-        },
-        zoom: 11
-    };
+    const {isLoaded} = useJsApiLoader({
+        id: 'google-map-script',
+        googleMapsApiKey: "AIzaSyCpoYLn6IllWuJeNCl77tmfCkSWL2dNLZo"
+    })
+
+    const [map, setMap] = useState(null);
+
+    const onLoad = useCallback(function callback(map) {
+        if (isLoaded) {
+            const bounds = new window.google.maps.LatLngBounds(center);
+            map.fitBounds(bounds);
+        }
+
+        setMap(map)
+    }, [])
+
+    const onUnmount = useCallback(function callback(map) {
+        setMap(null)
+    }, [])
 
     function getParks() {
         server.get("/user/get_all_parks",
@@ -47,16 +66,33 @@ export default function CarParkUserMap() {
         let filtered = parksData;
         if (query) {
             filtered = parksData.filter((park) =>
-                park.name && park.name.toLowerCase().includes(query.toLowerCase())
+                park.park.name.toLowerCase().includes(query.toLowerCase())
             );
         }
         setFilteredParks(filtered);
     }
 
+
     useEffect(() => {
         getParks();
         filterParks(parks, searchQuery);
+        mapData();
     }, []);
+
+    const mapData = () => {
+        server.get("/user/get_map_park",
+            {
+                headers: {"token": localStorage.getItem('token')}
+            }
+        ).then((res) => {
+            console.log(res.data);
+            setMapList(res.data);
+        }).catch((err) => {
+            alert(err);
+        });
+    }
+
+    if (!isLoaded) return <>Loading ...</>
 
     return (
         <div className="mt-28 bg-white mx-10 p-4 rounded-lg">
@@ -68,7 +104,10 @@ export default function CarParkUserMap() {
                         placeholder="Where Do You Want to park"
                         className="pl-2 py-2 col-span-6 rounded-lg"
                         value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onChange={(e) => {
+                            setSearchQuery(e.target.value);
+                            filterParks(parks, e.target.value); // Call filterParks with the updated query
+                        }}
                     />
                     <FiSearch className="cursor-pointer mx-auto" size={25}/>
                 </div>
@@ -111,20 +150,20 @@ export default function CarParkUserMap() {
                                             />
                                         </div>
                                         <div className="flex flex-col basis-2/3 px-6 justify-center">
-                                            <h6 className="text-md font-bold">{"Park" + spot.park.park_id}</h6>
+                                            <h6 className="text-md font-bold">{"Park : " + spot.park.name}</h6>
                                             <div className="flex">
                                                 <h6 className="text-md text-dark-green font-bold">
                                                     Open Today:
                                                 </h6>
-                                                <h6 className="ml-2 text-md font-bold">{spot.openToday}</h6>
+                                                <h6 className="ml-2 text-md font-bold">{spot.park.facilities}</h6>
                                             </div>
                                             <h6 className="text-md font-bold">Available: {spot.availability}</h6>
                                             <h6 className="w-fit text-md font-bold py-1 px-2 bg-dark-green text-white rounded-lg">
                                                 One Hour: {spot.park.price}
                                             </h6>
                                             <div className="flex flex-row gap-3">
-                                                <h6 className={`w-fit text-md my-1 font-bold py-1 px-3 rounded-lg ${spot.status === ENUMS.parkingStatus.available ? 'bg-dark-green text-white' : 'bg-red-800 text-white'}`}>
-                                                    {(spot.status) ? "Parking Full": "Parking Available"}
+                                                <h6 className={`w-fit text-md my-1 font-bold py-1 px-3 rounded-lg ${spot.status === true ? 'bg-dark-green text-white' : 'bg-red-800 text-white'}`}>
+                                                    {(spot.status) ? "Parking Available": "Parking Full"}
                                                 </h6>
                                             </div>
                                         </div>
@@ -151,13 +190,25 @@ export default function CarParkUserMap() {
                     </div>
                 ) : (
                     <div className="flex border rounded-lg items-center justify-center">
-                        <GoogleMapReact
-                            bootstrapURLKeys={{ key: "AIzaSyCpoYLn6IllWuJeNCl77tmfCkSWL2dNLZo" }}
-                            defaultCenter={defaultProps.center}
-                            defaultZoom={defaultProps.zoom}
+                        <GoogleMap
+                            mapContainerStyle={containerStyle}
+                            center={center}
+                            zoom={10}
+                            onLoad={onLoad}
+                            onUnmount={onUnmount}
                         >
-                            <Marker lat={6.92} lng={79.8} />
-                        </GoogleMapReact>
+                            {mapList.length > 0 &&
+                                mapList.map((spot) => (
+                                    <Marker
+                                        key={spot.name}
+                                        position={{
+                                            lat: parseFloat(spot.latitude),
+                                            lng: parseFloat(spot.longitude),
+                                        }}
+                                    />
+                                ))}
+
+                        </GoogleMap>
                     </div>
                 )}
             </div>
