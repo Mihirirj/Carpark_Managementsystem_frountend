@@ -9,12 +9,6 @@ const PATH = {
 
 const navLinks = [
     {
-        id: 1,
-        to: ROUTES.carParkOwnerDashboardHome,
-        icon: <AiFillHome size={25}/>,
-        label: "Home"
-    },
-    {
         id: 2,
         to: ROUTES.carParkOwnerDashboardDashboard,
         icon: <AiFillDashboard size={25}/>,
