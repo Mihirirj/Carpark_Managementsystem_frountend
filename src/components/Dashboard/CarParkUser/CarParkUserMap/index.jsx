@@ -98,7 +98,7 @@ export default function CarParkUserMap() {
         <div className="mt-28 bg-white mx-10 p-4 rounded-lg">
             <div className="grid grid-cols-4 gap-x-3 bg-light-gray items-center py-3 px-3 rounded-lg"
                  onClick={() => setSelectedSpot(null)}>
-                <div className="grid grid-cols-7 items-center bg-white rounded">
+                <div className="grid grid-cols-6 items-center bg-white rounded">
                     <input
                         type="text"
                         placeholder="Where Do You Want to park"
@@ -109,7 +109,6 @@ export default function CarParkUserMap() {
                             filterParks(parks, e.target.value); // Call filterParks with the updated query
                         }}
                     />
-                    <FiSearch className="cursor-pointer mx-auto" size={25}/>
                 </div>
                 <div className="flex justify-center">
                     <TbArrowBarRight size={25}/>
