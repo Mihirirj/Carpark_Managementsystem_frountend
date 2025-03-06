@@ -6,12 +6,12 @@ import {MdPayments, MdWifiCalling} from 'react-icons/md';
 import {ROUTES} from "../../../routes/routes";
 
 const navLinks = [
-    {
-        id: 1,
-        to: ROUTES.adminDashboardHome,
-        icon: <AiFillHome size={25}/>,
-        label: "Home"
-    },
+    // {
+    //     id: 1,
+    //     to: ROUTES.adminDashboardHome,
+    //     icon: <AiFillHome size={25}/>,
+    //     label: "Home"
+    // },
     {
         id: 2,
         to: ROUTES.adminDashboardDashboard,

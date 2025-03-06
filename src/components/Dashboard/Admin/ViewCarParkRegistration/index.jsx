@@ -27,7 +27,7 @@ export default function ViewCarParkRegistration() {
     const navigate= useNavigate();
 
     const handleSubmit = (values, {setSubmitting, resetForm}) => {
-        alert(JSON.stringify(values, null, 2));
+        // alert(JSON.stringify(values, null, 2));
         setSubmitting(false);
         resetForm();
 
@@ -94,17 +94,16 @@ export default function ViewCarParkRegistration() {
         if (selectedPark && Object.keys(selectedPark).length > 0 && selectedPark.park) {
             const updatedInitialValues = {
                 address: selectedPark.park.address || "",
-                name: selectedPark.park.name || "Name Akila",
+                name: selectedPark.park.name || "",
                 certificateNo: selectedPark.park.certificateNo || "",
-                parkingLotImage: selectedPark.park
-                    .parkingLotImage || "",
+                parkingLotImage: selectedPark.park.url || "",
                 latitude: selectedPark.park.latitude || "",
                 longitude: selectedPark.park.longitude || "",
                 numSpots: selectedPark.park.numSpots || "",
-                spotSize: selectedPark.park.spotSize || "",
+                spotSize: selectedPark.park.spot_size || "",
                 price: selectedPark.park.price || "",
                 facilities: selectedPark.park.facilities || "",
-                specialNotes: selectedPark.park.specialNotes || ""
+                specialNotes: selectedPark.park.special_note || ""
             };
 
             setInitialValues(updatedInitialValues);

@@ -20,6 +20,7 @@ const userInputFields = [
             {value: "owner", label: "Car Park Owner"},
             {value: "user", label: "Car Park User"},
             {value: "admin", label: "Admin"},
+            {value: "owner", label: "Car Park Owner"},
         ],
     },
 ];
