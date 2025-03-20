@@ -3,12 +3,9 @@
 
 ## 📸 UI Preview
 
-### 🔹 Home Page
-![Home Page](![Carpark_Slot](https://github.com/user-attachments/assets/d4aab8b5-c5ed-44a4-835e-57bdab4d8205)
-)
 
 ### 🔹 Dashboard
-![Dashboard](path/to/dashboard-screenshot.png)
+![Dashboard](D\Carpark\Carpark_dashboard.png)
 
 ### 🔹 Login Page
 ![Login Page](path/to/login-screenshot.png)
