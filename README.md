@@ -4,7 +4,8 @@
 ## 📸 UI Preview
 
 ### 🔹 Home Page
-![Home Page](D:\Car_Park\Carpark_dashboard.png)
+![Home Page](![Carpark_Slot](https://github.com/user-attachments/assets/d4aab8b5-c5ed-44a4-835e-57bdab4d8205)
+)
 
 ### 🔹 Dashboard
 ![Dashboard](path/to/dashboard-screenshot.png)
